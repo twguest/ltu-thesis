@@ -1,1 +1,186 @@
-\section{A Partially Coherent Model of the SPB-SFX Instrument Focus}
+\section{Theory}
+The development of X-ray Free Electron Laser (FEL) facilities has been motivated by the promise of single-particle imaging (SPI) of biomolecules at atomic-scale resolutions  \cite{oberthur_biological_2018}  as an extension to contemporary macromolecular crystallography (MX) techniques using third-generation synchrotron light sources. While the theoretical resolution limit of hard x-ray FEL SPI experiments ($\approx 3 $\AA) improves upon the diffraction limits of optical ($\approx 200$ nm) and electron ($\approx$ 1 nm – 10 nm)  microscopies \cite{spence_high-resolution_2017}, the small scattering cross section of organic materials in the hard x-ray regime \cite{henke_x-ray_1993} necessitates samples to be crystalised to improve diffraction efficiencies \cite{spence_x-ray_2012}. 
+
+The resolution of structural information obtained via MX using coherent synchrotron radiation is limited by crystal quality and radiation damage. Protein crystallography is a multivariate process and the optimisation of experimental conditions to achieve well-diffracting protein crystals is a field-in-itself \cite{drenth_principles_2007}. In general, protein structural determination is limited to the case of easily crystallised materials, restricting the scope of the technique. As in Cryogenic Electron Microscopy (Cryo-EM), radiation damage in MX is typically overcome by cryogenic freezing of the sample, which restricts the study of temporal dynamics and has been demonstrated to bias structural information \cite{fraser_accessing_2011}.\\
+
+The use of X-ray Free Electron Lasers (XFELs) light sources in structural biology is predicated on the principle that high-flux X-ray sources provide sufficient scattering signal from amorphous materials to circumvent the need for crystallisation \cite{starodub_dose_2008}. While it was initially believed that the radiation dose required for high-resolution elastic scattering would lead to inelastic processes that destroy the molecule during imaging, theoretical work \cite{solem_imaging_1986} suggested that sufficiently short X-ray pulses could outrun the sample damage process. This has since been demonstrated in simulation \cite{neutze_potential_2000} and experiment \cite{chapman_femtosecond_2006} and has encouraged the construction of dedicated SPI instruments at LCLS \cite{boutet_coherent_2011} and the European XFEL \cite{mancuso_single_2019}).
+
+Remediation of strict sample requirements in X-ray protein structure determination enable novel approaches to structural biology. The capacity to image amorphous materials due to the high-brightness of XFEL sources enables the study of previously unavailable classes of molecules, and the reduced dependence on sample damage mitigation due to ultra-fast pulse times allows the imaging of proteins and biomolecules in their native state. The development of the fast-repetition rate XFEL source at the European XFEL \cite{altarelli_xfel_2006} extends these science opportunities by enabling the exploration of temporal sample dynamics at megahertz intervals \cite{sobolev_megahertz_2020}.
+
+Despite early successes in SPI using XFEL sources, experimental resolutions are far-removed from the theoretical minimum \cite{gunther_sequential_2011,  hantke_high-throughput_2014}. While the optimisation of XFEL imaging shares some technical analogies with conventional imaging techniques (i.e. maximisation of detector efficiency and resolution), the primary inhibitors to atomic resolution are unique to the generation and transport of XFEL sources \cite{oberthur_biological_2018}. 
+
+The generation of photon-beams by the Self-Amplified Spontaneous Emission (SASE) radiation of relativistic electrons is an inherently stochastic process \cite{freund_principles_2018}. While transverse mode selection leads to an effectively spatially coherent source, inhomogenous broadening and energy spread result in spatially incoherent, quasi-stationary random pulses \cite{geloni_self-seeded_2020}, which manifest as pulse-to-pulse instabilities that have been implicated in the degradation of contemporary SPI applications \cite{nakano_single-particle_2018, nam_fixed_2016, nagaya_ultrafast_2016, ekeberg_single-shot_2016, ekeberg_three-dimensional_2015}. Issues regarding source fluctuations are compounded by challenges in optical transport, which impose strict fabrication requirements \cite{samoylova_requirements_2009}. 
+
+To maximise the capabilities of XFEL radiation, the SPI roadmap identifies the development of ‘drop-in’, shot-to-shot wavefield sensing mechanisms at the XFEL focus among the primary milestones in achieving atomic resolution, with the hope of future extension to parasitic, online wavefront characterisation schemes \cite{aquila_linac_2015}.  Direct measurement of XFEL focii are limited by both the insufficient spatial resolution of contemperary detectors and the damage caused. In the absence of suitable wavefront sensing mechanism, we pursuit a description of the SPB-SFX instrument focus under different operational conditions by construction of a wave-optics model. To date, no discussion of the properties of individual XFEL pulses at the instrument focus exists.
+
+
+\subsection{Properties of X-rays}
+
+
+\subsubsection{First Principles: Maxwell and Helmholtz Equations}
+We begin our disucssion of X-rays with the free-space Maxwell equations:
+
+\begin{align}
+    \divergence \efield \spacetime &=0 \label{eq: maxwell 1} \\
+     \divergence \bfield \spacetime &=0 \label{eq: maxwell 2} \\
+     \curl \efield\spacetime +  \tder \bfield\spacetime &=0 \label{eq: maxwell 3} \\
+     \curl \bfield\spacetime - \epsilon_0\mu_0 \tder \efield\spacetime &=0 \label{eq: maxwell 4} 
+\end{align}
+where \efield\ and \bfield\  are the electric field and magnetic induction vectors \footnote{where the bold format, unless stated otherwise, will be used throughout this text to denote vector notation}, $\epsilon_0$ and $\mu_0$ are the electrical and magnetic permitivity of free-space, and $\nabla$ and $\nabla \times$ denote the gradient and curl operators of the three-dimensional coordinate system: $x,y,z \in \mathcal{R}$. Using the vector identity [\eqn{\ref{eq: vector identity 1}}] and taking the curl of \eqn{\ref{eq: maxwell 3}} we get
+ 
+\begin{align}
+    \grad\left[\divergence\efield\spacetime\right]-\grad^2\efield\spacetime&+\curl\tder\bfield\spacetime = 0 \\
+    \tf \grad^2\efield\spacetime &= \ttder\epsilon_0\mu_0\efield\spacetime
+\end{align}
+which can be used to obtain the d'Alembert wave equation using the fact that $\epsilon_0\mu_0 = c^{-2}$:
+\begin{equation}\label{eq: d'Alembert equation}
+    \left(\frac{1}{c^2}\ttder-\grad^2\right)\efield\spacetime = 0,
+\end{equation}
+which can be equivalently obtained for the magnetic induction vector:
+\begin{equation}\label{eq: d'Alembert equation B}
+    \left(\frac{1}{c^2}\ttder-\grad^2\right)\bfield\spacetime = 0,
+\end{equation}
+which illustrates that each of the three spatial components of the free-space electric field and the free-space magnetic induction are uncoupled from each other. \\
+
+Finally, we note that either of these vector fields can be replaced by a single, complex scalar field function $E$ describing an electromagnetic disturbance in space-time:
+\begin{align}\label{eq: d'Alembert equation scalar}
+    \left(\frac{1}{c^2}\ttder-\grad^2\right)E\spacetime = 0,
+\end{align}
+which has the observable optical intensity $I$:
+
+\begin{align}
+    I\spacetime = \left|E\spacetime\right|^2.
+\end{align}
+
+
+\subsubsection{Propagation of X-rays in a Free-Space}
+Any electromagnetic field that obeys the d'Alembert equation (\eqn{\ref{eq: d'Alembert equation scalar}}) can be decomposed into a superposition of its monochromatic components via the Fourier transform:
+\begin{equation}\label{eq: analytical signal}
+    E\spacetime = \frac{1}{\sqrt{2\pi}}\int_0^\infty E_\omega \spatial \carrier d\omega
+\end{equation}
+where each $E_\omega$ denotes the spatial wavefield\footnote{Here we choose to distinguish between a wavefield as an electromagnetic disturbance defined in 3 spatial and 3 phase-space dimensions, as opposed to a wavefront, which we define to be a surface of constant phase. We restrict any use of the term wavefunction to describe probabilistic fields.} for a single temporal frequency $\omega$. We label the RHS of \eqn{\ref{eq: analytical signal}} as the analytical signal form of the electromagnetic disturbance E. Substituting \eqn{\ref{eq: analytical signal}} into \eqn{\ref{eq: d'Alembert equation scalar}} and defining the wavevector $k: k = \frac{\omega}{c}$ we obtain the Helmholtz equation for each of the components of the decomposed polychromatic field:
+\begin{equation}
+    \left(\grad^2 + k^2\right)E_\omega\spatial = 0.
+\end{equation}
+
+
+\subsubsection{Angular Spectrum Representation}
+With an understanding of the spectral decomposition of a wavefield, we move to define an operator which models the evolution of any suitably defined wavefield in an arbitrary parallel plane, \ie we pursue $E(x,y,z=\Delta z)$ from $E(x,y,z=0)$.\\
+
+Construct a Cartesian coordinate system with a monochromatic plane-wave defined in the plane of origin at $z=0$. Maintain that the wave is forward propagating: there is no points in the plane of origin where the flow of optical energy is right-to-left. Let $E_{\bar{\omega}}$ be the component of the analytical signal corresponding to the mean spectral frequency component of $E$ and consider the wave-vector $k$ to be the sum of separable spatial components: \kx, \ky and \kz. Hence, the longitudinal wavevector of any solution to the Helmholtz equation can subsequently be defined: 
+\begin{equation}
+    \kz^2 = \sqrt{k^2-\kx^2-\ky^2}.
+\end{equation}
+
+which enables us to write the plane-wave disturbance at origin:
+\begin{equation}\label{eq: plane wave}
+     E_\omega\spatial = \exp\left[i\left(\kx x + \ky y + \kz z\right)\right]
+\end{equation}
+as the product of its transverse and longitudinal elements:
+
+\begin{align}\label{eq: plane wave equation}
+    E_\omega(x,y,z=0) &= \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]\\
+    &= \exp\left[i\left(\kx x + \ky y\right)\right]\exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right].
+\end{align}
+
+From \eqn{\ref{eq: plane wave equation}} we see that:
+
+\begin{equation}
+    E_\omega(x,y,z=0) = \exp\left[i\left(\kx x + \ky y \right)\right]
+\end{equation}
+
+which means that the evolution of the unpropagated field $E(x,y,z=0)$ is obtained by multiplication of the initial wavefield by the free space operator $\exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]$.\\
+
+We can represent any $E_\omega$ as the two-dimensional Fourier integral describing the linear contribution of its plane-wave spatial components:
+
+\begin{equation}\label{eq: plane wave decomposition}
+    E_\omega(x,y,z = 0) = \frac{1}{2\pi}\iint E_\omega(\kx,\ky,z=0)exp\left[i(\kx x + \ky y)\right]d\kx d\ky
+\end{equation}
+
+where each spatial component in the integral on the RHS of \eqn{}
+
+
+
+\begin{align}
+        \notag E_\omega(x,y,z = \Delta z) &= \frac{1}{2\pi}\iint  E_\omega(\kx,\ky,z=0)exp
+        \left[i(\kx x + \ky y)\right]\\
+        &\times \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]
+        d\kx d\ky
+\end{align}
+From which we define the Frensel diffraction operator, $\mathcal{D}_{\Delta z}$:
+
+\begin{equation}\label{eq: fresnel diffraction operation}
+    E_\omega(x,y,z=\Delta z) = \mathcal{D}_{\Delta z}E_\omega(x,y,z=0)
+\end{equation}
+
+\begin{equation}\label{eq: fresnel diffraction operator}
+    \mathcal{D}_{\Delta z} = \ifourier \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right] \fourier 
+\end{equation}
+
+\eqn{\ref{algorithm: fresnel diffraction}}
+
+where \fourier \ and $\ifourier$ \ are the Fourier and inverse Fourier transforms with respect to transverse coordinates.
+
+With this formulation, we present an algorithm for propagating any polychromatic scalar disturbance to an arbitrary parallel plane:
+\begin{enumerate}\label{algorithm: fresnel diffraction}
+    \item Take the angular decomposition of the polychromatic field, $E$ into its monochromatic components $E_\omega$ via Equation \ref{eq: analytical signal}.
+    \item Decompose each monochromatic component of the analytical signal into its plane-wave spatial components via Equation \ref{eq: plane wave decomposition}.
+    \item Multiply each of the plane wave components by the free-space Fresnel diffraction operator given in Equation \ref{eq: fresnel diffraction operator}.
+    \item Recompose each of the propagated monochromatic components as the sum of its spatial spatial frequencies by taking the inverse Fourier transform of the R.H.S of \ref{eq: plane-wave decomposition}.
+    \item Recompose the propagated, polychromatic electric field from the sum of its monochromatic components by taking the inverse Fourier transform of the R.H.S of \ref{eq: analytical signal}.
+\end{enumerate}
+
+\subsubsection{Fresnel Diffracton}
+Collimated optical fields are considered to be paraxial when all non-negligible plane wave components make a small angle wioth respect to the optical axis. In this case, the longitudinal wavevector can be expressed via the binomial approximation:
+
+\begin{equation}\label{frensel binomial}
+\sqrt{k^2-\kx^2-\ky^2}\approx k-\frac{\kx\2+\ky\2}{2k}
+\end{equation}
+allowing the free-space propagator \D to be re-written for the propagation of paraxial wavefields:
+
+\begin{equation}
+
+\end{equation}
+
+\subsubsection{Interaction of X-rays with Matter}
+\subsubsection{Optical Coherence}
+
+\subsection{XFEL Radiation}
+\subsubsection{Fundamentals of Synchrotron Radiation}
+\subsubsection{The SASE Process}
+\subsubsection{Coherence Properties of XFEL Radiation}
+
+
+\subsection{The SPB-SFX Instrument}
+\subsubsection{Imaging at XFEL Facilities}
+\subsubsection{Instrument Layout}
+
+
+
+\section{Method}
+
+
+\subsection{The Coherent Source Model}
+\subsubsection{Description of the Coherent Source Model}
+\subsubsection{Validation of the Coherent Source Model}
+
+\subsection{Modelling Beamline Optics}
+\subsubsection{Description and Validation of the Mirror Materials}
+\subsubsection{Description and Validation of the Mirror Apertures}
+\subsubsection{Description and Validation of the Mirror Surfaces}
+
+\subsection{The Coherent Focus}
+
+
+\subsection{The Partially Coherent Source Model}
+\subsubsection{Description of the Partially Coherent Source}
+\subsubsection{Comparison to Experiment}
+
+
+
+
+\section{Results and Discussion}
+\subsection{Properties of the Partially Coherent Focus}
+\subsection{Discussion}
+
+\section{Conclusions}

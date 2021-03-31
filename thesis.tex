@@ -52,10 +52,43 @@
 \newcommand{\myFaculty}{College of Science, Health and Engineering}
 \newcommand{\mySchool}{School of Engineering and Mathematical Sciences}
 \newcommand{\myUni}{La Trobe University}
+
+
+
+% macros
+
+\newcommand{\eqn}[1]{Equation {#1}}
+
+
+% Math Commands
+\newcommand{\curl}{\ensuremath{\nabla\times}} 
+\newcommand{\2}{\ensuremath{^2}} 
+\newcommand{\mathcal{D}}{\ensuremath{\D}} 
+\newcommand{\mathcal{DF}}{\ensuremath{^{(F)}\D}} 
+\newcommand{\mathcal{DFr}}{\ensuremath{^{(Fr)}\D}} 
+\newcommand{\mathcal{DH}}{\ensuremath{^{(HF)}\D}} 
+%%% curl
+\newcommand{\grad}{\ensuremath{\nabla}} %%% gradient
+\newcommand{\divergence}{\ensuremath{\nabla\cdot}}
+\newcommand{\efield}{\ensuremath{\boldsymbol{E}}}
+\newcommand{\bfield}{\ensuremath{\boldsymbol{B}}}
+\newcommand{\fourier}{\ensuremath{\mathcal{F}}}
+\newcommand{\ifourier}{\ensuremath{\mathcal{F}^{-1}}}
+\newcommand{\tder}{\ensuremath{\frac{\partial}{\partial t}}}
+\newcommand{\ttder}{\ensuremath{\frac{\partial^2}{\partial t^2}}}
+\newcommand{\spacetime}{\ensuremath{(x,y,z,t)}}
+\newcommand{\spatial}{\ensuremath{(x,y,z)}}
+\newcommand{\kx}{\ensuremath{k_x}}
+\newcommand{\kz}{\ensuremath{k_z}}
+\newcommand{\ky}{\ensuremath{k_y}}
+\newcommand{\carrier}{\ensuremath{\exp\left(-i\omega t\right)}}
+\newcommand{\tf}{\ensuremath{\Rightarrow}}
+
+
 % -----------------------------------------------------------------------------
 
 \input{classicthesis-config}
-\addbibresource{library.bib}
+\addbibresource{references.bib}
 
 \begin{document}
   \frenchspacing
@@ -92,7 +125,7 @@
   \chapter{Introduction}\label{c:Introduction}
   \input{text/ch1}
   
-  \chapter{Modelling the SPB-SFX Instrument Focus}\label{c:Background}
+  \chapter{Computational Modelling}\label{c:Background}
   \input{text/ch2}
   
   \chapter{Related Works}\label{c:Related-Works}
@@ -111,7 +144,8 @@
   \input{text/ch7}
   
   \cleardoublepage
-  \appendix
+  \chapter{Appendix 1: Vector Identities}
+  \input{text/app1}
   
   \singlespacing
   \input{text/app-bibliography}
