@@ -20,37 +20,46 @@
 % -----------------------------------------------------------------------------
 %   CONFIGURATION
 % -----------------------------------------------------------------------------
+
+\usepackage{float}
+
+
+ 
+
 % Thesis and submission:
-\newcommand{\myTitle}{Using Thinking Machines to Alleviate our Dependency on Guild Navigators}
-\newcommand{\mySubmissionYear}{2018}
-\newcommand{\mySubmissionMonth}{October}
-\newcommand{\mySubmissionDay}{31}
+\newcommand{\myTitle}{XFEL Pulse Ensembles}
+\newcommand{\mySubmissionYear}{-}
+\newcommand{\mySubmissionMonth}{---}
+\newcommand{\mySubmissionDay}{---}
 
 % Regarding yourself:
-\newcommand{\myFirstName}{Feyd-Rautha}
-\newcommand{\myLastName}{Harkonnen}
+\newcommand{\myFirstName}{Trey Wilson}
+\newcommand{\myLastName}{Guest}
 \newcommand{\myWebsite}{https://en.wikipedia.org/wiki/Feyd-Rautha}
-\newcommand{\myBirthYear}{1965}
-\newcommand{\myBirthMonth}{January}
-\newcommand{\myBirthDay}{31}
-\newcommand{\myBirthPlace}{Lankiveil}
+\newcommand{\myBirthYear}{1995}
+\newcommand{\myBirthMonth}{November}
+\newcommand{\myBirthDay}{23}
+\newcommand{\myBirthPlace}{Kew}
 
 % Primary supervisor:
 \newcommand{\myProfTitle}{Prof.}
-\newcommand{\myProfFirstName}{Piter}
-\newcommand{\myProfLastName}{De Vries}
+\newcommand{\myProfFirstName}{Brian}
+\newcommand{\myProfLastName}{Abbey}
 \newcommand{\myProfWebsite}{http://homepage.cs.latrobe.edu.au/pdevries}
 
 % Co-supervisor:
 \newcommand{\myOtherProfTitle}{Dr}
-\newcommand{\myOtherProfFirstName}{Thufir}
-\newcommand{\myOtherProfLastName}{Hawat}
+\newcommand{\myOtherProfFirstName}{Grant}
+\newcommand{\myOtherProfLastName}{van Riessen}
 \newcommand{\myOtherProfWebsite}{http://homepage.cs.latrobe.edu.au/hthufir}
 
+ 
+
+
 % University related:
-\newcommand{\myDepartment}{Department of Computer Science and Information Technology}
+\newcommand{\myDepartment}{Department of Chemistry and Physics}
 \newcommand{\myFaculty}{College of Science, Health and Engineering}
-\newcommand{\mySchool}{School of Engineering and Mathematical Sciences}
+\newcommand{\mySchool}{School of Molecular Sciences}
 \newcommand{\myUni}{La Trobe University}
 
 
@@ -58,15 +67,19 @@
 % macros
 
 \newcommand{\eqn}[1]{Equation {#1}}
-
+\newcommand{\mod}[1]{\left\| \right\|}
+\newcommand{\ensemble}[1]{\left\langle \right\rangle}
 
 % Math Commands
 \newcommand{\curl}{\ensuremath{\nabla\times}} 
 \newcommand{\2}{\ensuremath{^2}} 
-\newcommand{\mathcal{D}}{\ensuremath{\D}} 
-\newcommand{\mathcal{DF}}{\ensuremath{^{(F)}\D}} 
-\newcommand{\mathcal{DFr}}{\ensuremath{^{(Fr)}\D}} 
-\newcommand{\mathcal{DH}}{\ensuremath{^{(HF)}\D}} 
+\newcommand{\D}{\ensuremath{\mathcal{D}}} 
+\newcommand{\DF}{\ensuremath{\mathcal{D}^{(F)}}}
+
+\newcommand{\DFr}{\ensuremath{\mathcal{D}^{(Fr)}}} 
+
+\newcommand{\DHF}{\ensuremath{\mathcal{D}^{(HF)}}} 
+
 %%% curl
 \newcommand{\grad}{\ensuremath{\nabla}} %%% gradient
 \newcommand{\divergence}{\ensuremath{\nabla\cdot}}
@@ -83,7 +96,13 @@
 \newcommand{\ky}{\ensuremath{k_y}}
 \newcommand{\carrier}{\ensuremath{\exp\left(-i\omega t\right)}}
 \newcommand{\tf}{\ensuremath{\Rightarrow}}
-
+\newcommand{\om}{\ensuremath{\omega}}
+\newcommand{\bom}{\ensuremath{\bar{\omega}}}
+\newcommand{\dz}{\ensuremath{\Delta z}}
+\newcommand{\half}{\ensuremath{\frac{1}{2}}}
+\newcommand{\rb}{\ensuremath{\boldsymbol{r}}}
+\newcommand{\rperp}{\ensuremath{\boldsymbol{r_\perp}}}
+\newcommand{\rpara}{\ensuremath{\boldsymbol{r_\parallel}}}
 
 % -----------------------------------------------------------------------------
 
@@ -125,23 +144,23 @@
   \chapter{Introduction}\label{c:Introduction}
   \input{text/ch1}
   
-  \chapter{Computational Modelling}\label{c:Background}
+  \chapter{Computational Modelling}\label{c: Computational Modelling}
   \input{text/ch2}
   
-  \chapter{Related Works}\label{c:Related-Works}
+  \chapter{Nearfield Sensing}\label{c: Nearfield Sensing}
   \input{text/ch3}
   
-  \chapter{Major Contribution 1}\label{c:Contribution-1}
-  \input{text/ch4}
+  %\chapter{Major Contribution 1}\label{c:Contribution-1}
+  %\input{text/ch4}
   
-  \chapter{Major Contribution 2}\label{c:Contribution-2}
-  \input{text/ch5}
+  %\chapter{Major Contribution 2}\label{c:Contribution-2}
+  %\input{text/ch5}
 
-  \chapter{Experiments}\label{c:Experiments}
-  \input{text/ch6}
+  %\chapter{Experiments}\label{c:Experiments}
+  %\input{text/ch6}
   
-  \chapter{Conclusions}\label{c:Conclusions}
-  \input{text/ch7}
+  %\chapter{Conclusions}\label{c:Conclusions}
+  %\input{text/ch7}
   
   \cleardoublepage
   \chapter{Appendix 1: Vector Identities}
@@ -151,8 +170,4 @@
   \input{text/app-bibliography}
   \cleardoublepage
   
-  \pagestyle{empty}
-  \onehalfspacing
-  \input{text/app-colophon}
-
 \end{document}

@@ -11,7 +11,7 @@ Despite early successes in SPI using XFEL sources, experimental resolutions are 
 
 The generation of photon-beams by the Self-Amplified Spontaneous Emission (SASE) radiation of relativistic electrons is an inherently stochastic process \cite{freund_principles_2018}. While transverse mode selection leads to an effectively spatially coherent source, inhomogenous broadening and energy spread result in spatially incoherent, quasi-stationary random pulses \cite{geloni_self-seeded_2020}, which manifest as pulse-to-pulse instabilities that have been implicated in the degradation of contemporary SPI applications \cite{nakano_single-particle_2018, nam_fixed_2016, nagaya_ultrafast_2016, ekeberg_single-shot_2016, ekeberg_three-dimensional_2015}. Issues regarding source fluctuations are compounded by challenges in optical transport, which impose strict fabrication requirements \cite{samoylova_requirements_2009}. 
 
-To maximise the capabilities of XFEL radiation, the SPI roadmap identifies the development of ‘drop-in’, shot-to-shot wavefield sensing mechanisms at the XFEL focus among the primary milestones in achieving atomic resolution, with the hope of future extension to parasitic, online wavefront characterisation schemes \cite{aquila_linac_2015}.  Direct measurement of XFEL focii are limited by both the insufficient spatial resolution of contemperary detectors and the damage caused. In the absence of suitable wavefront sensing mechanism, we pursuit a description of the SPB-SFX instrument focus under different operational conditions by construction of a wave-optics model. To date, no discussion of the properties of individual XFEL pulses at the instrument focus exists.
+To maximise the capabilities of XFEL radiation, the SPI roadmap \cite{aquila_linac_2015} identifies the development of ‘drop-in’, shot-to-shot wavefield sensing mechanisms at the XFEL focus among the primary milestones in achieving atomic resolution, with the hope of future extension to parasitic, online wavefront characterisation schemes \cite{aquila_linac_2015}.  Direct measurement of XFEL focii are limited by both the insufficient spatial resolution of contemperary detectors and the damage caused. In the absence of suitable wavefront sensing mechanism, we pursuit a description of the SPB-SFX instrument focus under different operational conditions by construction of a wave-optics model. To date, no discussion of the properties of individual XFEL pulses at the instrument focus exists.
 
 
 \subsection{Properties of X-rays}
@@ -56,45 +56,45 @@ which has the observable optical intensity $I$:
 \subsubsection{Propagation of X-rays in a Free-Space}
 Any electromagnetic field that obeys the d'Alembert equation (\eqn{\ref{eq: d'Alembert equation scalar}}) can be decomposed into a superposition of its monochromatic components via the Fourier transform:
 \begin{equation}\label{eq: analytical signal}
-    E\spacetime = \frac{1}{\sqrt{2\pi}}\int_0^\infty E_\omega \spatial \carrier d\omega
+    E\spacetime = \frac{1}{\sqrt{2\pi}}\int_0^\infty E_\om \spatial \carrier d\om
 \end{equation}
-where each $E_\omega$ denotes the spatial wavefield\footnote{Here we choose to distinguish between a wavefield as an electromagnetic disturbance defined in 3 spatial and 3 phase-space dimensions, as opposed to a wavefront, which we define to be a surface of constant phase. We restrict any use of the term wavefunction to describe probabilistic fields.} for a single temporal frequency $\omega$. We label the RHS of \eqn{\ref{eq: analytical signal}} as the analytical signal form of the electromagnetic disturbance E. Substituting \eqn{\ref{eq: analytical signal}} into \eqn{\ref{eq: d'Alembert equation scalar}} and defining the wavevector $k: k = \frac{\omega}{c}$ we obtain the Helmholtz equation for each of the components of the decomposed polychromatic field:
+where each $E_\om$ denotes the spatial wavefield\footnote{Here we choose to distinguish between a wavefield as an electromagnetic disturbance defined in 3 spatial and 3 phase-space dimensions, as opposed to a wavefront, which we define to be a surface of constant phase. We restrict any use of the term wavefunction to describe probabilistic fields.} for a single temporal frequency $\om$. We label the RHS of \eqn{\ref{eq: analytical signal}} as the analytical signal form of the electromagnetic disturbance E. Substituting \eqn{\ref{eq: analytical signal}} into \eqn{\ref{eq: d'Alembert equation scalar}} and defining the wavevector $k: k = \frac{\om}{c}$ we obtain the Helmholtz equation for each of the components of the decomposed polychromatic field:
 \begin{equation}
-    \left(\grad^2 + k^2\right)E_\omega\spatial = 0.
+    \left(\grad^2 + k^2\right)E_\om\spatial = 0.
 \end{equation}
 
 
 \subsubsection{Angular Spectrum Representation}
-With an understanding of the spectral decomposition of a wavefield, we move to define an operator which models the evolution of any suitably defined wavefield in an arbitrary parallel plane, \ie we pursue $E(x,y,z=\Delta z)$ from $E(x,y,z=0)$.\\
+With an understanding of the spectral decomposition of a wavefield, we move to define an operator which models the evolution of any suitably defined wavefield in an arbitrary parallel plane, \ie we pursue $E(x,y,z=\dz)$ from $E(x,y,z=0)$.\\
 
-Construct a Cartesian coordinate system with a monochromatic plane-wave defined in the plane of origin at $z=0$. Maintain that the wave is forward propagating: there is no points in the plane of origin where the flow of optical energy is right-to-left. Let $E_{\bar{\omega}}$ be the component of the analytical signal corresponding to the mean spectral frequency component of $E$ and consider the wave-vector $k$ to be the sum of separable spatial components: \kx, \ky and \kz. Hence, the longitudinal wavevector of any solution to the Helmholtz equation can subsequently be defined: 
+Construct a Cartesian coordinate system with a monochromatic plane-wave defined in the plane of origin at $z=0$. Maintain that the wave is forward propagating: there is no points in the plane of origin where the flow of optical energy is right-to-left. Let $E_{\bar{\om}}$ be the component of the analytical signal corresponding to the mean spectral frequency component of $E$ and consider the wave-vector $k$ to be the sum of separable spatial components: \kx, \ky and \kz. Hence, the longitudinal wavevector of any solution to the Helmholtz equation can subsequently be defined: 
 \begin{equation}
     \kz^2 = \sqrt{k^2-\kx^2-\ky^2}.
 \end{equation}
 
 which enables us to write the plane-wave disturbance at origin:
 \begin{equation}\label{eq: plane wave}
-     E_\omega\spatial = \exp\left[i\left(\kx x + \ky y + \kz z\right)\right]
+     E_\om\spatial = \exp\left[i\left(\kx x + \ky y + \kz z\right)\right]
 \end{equation}
 as the product of its transverse and longitudinal elements:
 
 \begin{align}\label{eq: plane wave equation}
-    E_\omega(x,y,z=0) &= \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]\\
+    E_\om(x,y,z=0) &= \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]\\
     &= \exp\left[i\left(\kx x + \ky y\right)\right]\exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right].
 \end{align}
 
 From \eqn{\ref{eq: plane wave equation}} we see that:
 
 \begin{equation}
-    E_\omega(x,y,z=0) = \exp\left[i\left(\kx x + \ky y \right)\right]
+    E_\om(x,y,z=0) = \exp\left[i\left(\kx x + \ky y \right)\right]
 \end{equation}
 
-which means that the evolution of the unpropagated field $E(x,y,z=0)$ is obtained by multiplication of the initial wavefield by the free space operator $\exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]$.\\
+\noindent which means that the evolution of the unpropagated field $E(x,y,z=0)$ is obtained by multiplication of the initial wavefield by the free space operator $\exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]$.\\
 
-We can represent any $E_\omega$ as the two-dimensional Fourier integral describing the linear contribution of its plane-wave spatial components:
+We can represent any $E_\om$ as the two-dimensional Fourier integral describing the linear contribution of its plane-wave spatial components:
 
 \begin{equation}\label{eq: plane wave decomposition}
-    E_\omega(x,y,z = 0) = \frac{1}{2\pi}\iint E_\omega(\kx,\ky,z=0)exp\left[i(\kx x + \ky y)\right]d\kx d\ky
+    E_\om(x,y,z = 0) = \frac{1}{2\pi}\iint E_\om(\kx,\ky,z=0)exp\left[i(\kx x + \ky y)\right]d\kx d\ky
 \end{equation}
 
 where each spatial component in the integral on the RHS of \eqn{}
@@ -102,49 +102,182 @@ where each spatial component in the integral on the RHS of \eqn{}
 
 
 \begin{align}
-        \notag E_\omega(x,y,z = \Delta z) &= \frac{1}{2\pi}\iint  E_\omega(\kx,\ky,z=0)exp
+        \notag E_\om(x,y,z = \dz) &= \frac{1}{2\pi}\iint  E_\om(\kx,\ky,z=0)exp
         \left[i(\kx x + \ky y)\right]\\
         &\times \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right]
         d\kx d\ky
 \end{align}
-From which we define the Frensel diffraction operator, $\mathcal{D}_{\Delta z}$:
+From which we define the free-space diffraction operator, $\mathcal{D}_{\dz}$:
 
 \begin{equation}\label{eq: fresnel diffraction operation}
-    E_\omega(x,y,z=\Delta z) = \mathcal{D}_{\Delta z}E_\omega(x,y,z=0)
+    E_\om(x,y,z=\dz) = \mathcal{D}_{\dz}E_\om(x,y,z=0)
 \end{equation}
 
 \begin{equation}\label{eq: fresnel diffraction operator}
-    \mathcal{D}_{\Delta z} = \ifourier \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right] \fourier 
+    \mathcal{D}_{\dz} = \ifourier \exp\left[iz\sqrt{k^2-\kx^2-\ky^2}\right] \fourier 
 \end{equation}
 
-\eqn{\ref{algorithm: fresnel diffraction}}
+
 
 where \fourier \ and $\ifourier$ \ are the Fourier and inverse Fourier transforms with respect to transverse coordinates.
 
 With this formulation, we present an algorithm for propagating any polychromatic scalar disturbance to an arbitrary parallel plane:
 \begin{enumerate}\label{algorithm: fresnel diffraction}
-    \item Take the angular decomposition of the polychromatic field, $E$ into its monochromatic components $E_\omega$ via Equation \ref{eq: analytical signal}.
+    \item Take the angular decomposition of the polychromatic field, $E$ into its monochromatic components $E_\om$ via Equation \ref{eq: analytical signal}.
     \item Decompose each monochromatic component of the analytical signal into its plane-wave spatial components via Equation \ref{eq: plane wave decomposition}.
     \item Multiply each of the plane wave components by the free-space Fresnel diffraction operator given in Equation \ref{eq: fresnel diffraction operator}.
-    \item Recompose each of the propagated monochromatic components as the sum of its spatial spatial frequencies by taking the inverse Fourier transform of the R.H.S of \ref{eq: plane-wave decomposition}.
+    \item Recompose each of the propagated monochromatic components as the sum of its spatial spatial frequencies by taking the inverse Fourier transform of the R.H.S of \ref{eq: plane wave decomposition}.
     \item Recompose the propagated, polychromatic electric field from the sum of its monochromatic components by taking the inverse Fourier transform of the R.H.S of \ref{eq: analytical signal}.
 \end{enumerate}
 
-\subsubsection{Fresnel Diffracton}
-Collimated optical fields are considered to be paraxial when all non-negligible plane wave components make a small angle wioth respect to the optical axis. In this case, the longitudinal wavevector can be expressed via the binomial approximation:
+\subsubsection{Fresnel Diffracton}\label{ss: Fresnel diffraction}
+Collimated optical fields are considered to be paraxial when all non-negligible plane wave components make a small angle with respect to the optical axis. In this case, the longitudinal wavevector can be expressed via the binomial approximation:
 
 \begin{equation}\label{frensel binomial}
 \sqrt{k^2-\kx^2-\ky^2}\approx k-\frac{\kx\2+\ky\2}{2k}
 \end{equation}
 allowing the free-space propagator \D to be re-written for the propagation of paraxial wavefields:
 
-\begin{equation}
-
+\begin{equation}\label{eq: Fresnel Operator}
+\DF \equiv \exp\left(i k \dz\right)\ifourier\exp\left[\frac{i\dz \left(\kx\2+\ky2\right)}{2k}\right]
 \end{equation}
 
-\subsubsection{Interaction of X-rays with Matter}
-\subsubsection{Optical Coherence}
 
+\begin{align}\label{eq: Frensel Diffraction}
+\notag E_\om(x,y,z = \dz) &\equiv \DF E_\om(x,y,z=0) \\
+&=  \exp\left(ik\dz\right)\ifourier\exp\left[\frac{i\dz \left(\kx\2+\ky\2\right)}{2k}\right]\fourier E_\om(x,y,z = 0)
+\end{align}
+ 
+where the paraxial Fresnel free-space diffraction operator is labelled \DF
+
+\subsubsection{Sampling Requirements of the Fresnel Propagator}
+The issue of adequately sampling a wavefield pertains to the loss of information due to the dicretisation of a continuous signal - undersampling manifests as non-physical signal artifacts due to loss of phase information of high spatial frequencies in the discretisation of fields in numerical applications, as well as physical applications (\ie the discretisation of a physical field due to the finite resolution of an optical intensity detector). For a paraxial field, as in \ref{ss: Fresnel diffraction}, discrete representations of the field dictate finite step sizes in the \fourier and \ifourier. Considering first the computational case \footnote{where the available parameter space is less restrictive} implementation of a discrete Fourier and inverse Fourier samples on each of the transverse dimensions must sample the continuous space at an interval smaller than or equal to the Nyquist limit, $\boldsymbol{N}$:
+
+\begin{equation}\label{eq: Nyquist Limit}
+    \boldsymbol{N} \leq \pi k_{max}^{-1}= \pi\sigma_{max}
+\end{equation}
+
+where $k_{max}$ and $\sigma_{max}$ are the extent of the wavefield in frequency and real-space. This denotes that the approximation in \eqn{\ref{eq: Frensel Diffraction}} if the phase-gradient of adjacent spatial frequencies is less than $\pi$. An expression for the satisfactory spatial step-size of the discrete field can be defined considering the maximum phase of a paraxial field propagated a distance $\dz$ in free-space \footnote{which occurs at the boundary of the continuous wavefield defined in real-space}:
+
+\begin{equation}\label{eq: Phase of Fresnel Propagator}
+    \phi^{(F)}_{max} = \frac{k}{2\dz \sigma_{max}}, \quad
+    \tf \frac{\partial \phi^{(F)}_{max}}{\partial k_{max}} = \pi \sigma_{max}.
+\end{equation}
+For simplicity, consider the wavefield to be axiosymmetric so that it may be defined on the interval $\left[\frac{-\sigma_{max}}{2}, \frac{\sigma_{max}}{2}\right]$ which has a corresponding Fourier space domain $\left[\frac{N}{-2\sigma_{max}}, \frac{N}{2\sigma_{max}}\right]$ where $N$ is the number of discrete points over which the continuous wavefield has been sampled. Defining a sampling interval $dN = \frac{\sigma_{max}}{N}$ and making use of the fact $k = \frac{2\pi}{\lambda}$, as well as \eqn{\ref{eq: Nyquist Limit}} and \eqn{\ref{eq: Phase of Fresnel Propagator}} we can define the minimum sampling frequency of a paraxial field propagated through free space:
+
+\begin{equation}\label{eq: sampling requirements}
+    dN \leq \frac{\dz \lambda}{\sigma_{max}}.
+\end{equation}
+In experiment, $dN$ corresponds to the minimum spatial resolution of an optical intensity detector to avoid artefacts in representing an optical wavefield. We note that in many experimental cases this value is fixed and the issue of sampling is solved by shifting the detector downstream. 
+
+\subsubsection{The Huygens-Fresnel Convolution Propagator}
+\eqn{\ref{eq: sampling requirements}} imposes severe restrictions on the complexity of fields that can be represented computationally as the size of any $E_\om(x,y)$ scales with $N^2$. Making use of the Fourier convolution theorem (link to appendix) by noting that the convolution of any two well behaved functions $f(x,y)$ and $g(x,y)$ can be written in terms of \fourier and \ifourier:
+
+\begin{equation}\label{eq: fourier convolution statement}
+f(x,y) \circledast g(x,y) = 2\pi \ifourier\left\{\fourier \left[ f(x,y) \right]\fourier\left[g(x,y) \right] \right\}
+\end{equation}
+allowing us to write \ref{eq: Frensel Diffraction}
+
+\begin{align}\label{eq: Huygens Fresnel Diffraction}
+\notag E_\om(x,y,z = \dz) &= 
+2\pi\ifourier \{ \fourier\ifourier \left[\frac{1}{2\pi}\exp(ik \dz)\exp\left(\frac{-ik(\kx\2+\ky\2)}{2k}\right)\right] \\
+&\times\fourier \left[E_\om(x,y,z = 0)\right]\} \\
+&\equiv E_\om(x,y,z=0)\circledast\DHF(x,y,z=\dz)
+\end{align}
+where we define \DHF to be the Huygens-Fresnel free-space propagation operator which formulates the propagated wavefield as the sum of electromagnetic disturbances propagated from each sampled point in the unpropagated plane as spherical waves (cite): 
+%%%%% note x_0 should be changed to x' but requires a latex fix re: double superscripts
+\begin{align}\label{eq: Huygens Fresnel convolution}
+\notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}\iint E_\om(x_0,y_0,z = 0) \\
+&\times\exp\{\frac{ik}{2\dz}\left[(x\2-x_0\2)+(y\2-y_0\2) \right]\}dx_0dy_0
+\end{align}
+The absence of  a Fourier transform on the RHS of \eqn{\ref{eq: Huygens Fresnel convolution}} provides a convenient method of circumventing sampling requirements in numerical propagation of free-space diffraction. 
+
+\subsubsection{Fraunhofer Diffraction}
+Finally, we consider the limiting case where the propagation distance is far greater than the characteristic length scales of the wavefield. Factorising \eqn{\ref{eq: Huygens Fresnel convolution}}:
+
+\begin{align}\label{eq: factorised huygens fresnel}
+\notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}
+\exp\left[\frac{ik(x\2+y\2)}{2\dz}\right]
+\iint E_\om(x_0,y_0,z = 0) \\
+&\times\exp\{\frac{ik}{2\dz}\left[(x\2-x_0\2)+(y\2-y_0\2) \right]\}dx_0dy_0
+\end{align}
+
+
+
+\subsection{Interaction of X-rays with Matter}
+The interaction of light with matter is at the center of x-ray imaging. The structural information incoded in the wavefield during the coupling of the light and matter fields enables interpretation of the three-dimensional structure of the material. Here we pursue a description of the evolution of electromagnetic fields in the presence of a scattering medium, beginning with the generalised Maxwell's equations:
+
+\begin{align}
+    \divergence \boldsymbol{D} \spacetime &= \rho\spacetime \label{eq: maxwell 5} \\
+     \curl \boldsymbol{H}\spacetime - \tder \boldsymbol{D}\spacetime &= \boldsymbol{J}\spacetime \label{eq: maxwell 6} 
+\end{align}
+\noindent where we have introduced the electric displacement vector, $\boldsymbol{D}$, and the magnetic field $\boldsymbol{H}$, charge density $\rho$ and current density $\boldsymbol{J}$. We note that \eqn{\ref{eq: maxwell 2}} and \eqn{\ref{eq: maxwell 3}} hold as in free-space. \eqn{\ref{eq: maxwell 5}} is Gauss' law and states the proprtionality of the charged enclosed within a surface and the lectric displacement flux through the surface. \eqn{\ref{eq: maxwell 6}} is Maxwell's modification of Gauss' law and denotes that magnetic fields can be induced by both electric current or a changing displacement field.\\
+
+In general, the displacement and induction vectors are functions of \efield and \bfield \footnote{in ferroelectric and ferromagnetic materials, $\boldsymbol{D}$ and \boldsymbol{B} depend on the history of the material}. Restricting ourselves to the case of linear materials, let $\boldsymbol{D} = \epsilon\efield$ and $\bfield = \mu\boldsymbol{H}$ where $\epsilon$ and $\mu$ denote the electrical and magnetic permetivity of the materials. Hence, we can re-write Maxwell's equations in terms of \efield and \bfield:
+\begin{align}
+    \divergence \left[\epsilon\spacetime\efield\spacetime\right] &= \rho\spacetime \label{eq: maxwell 7} \\
+     \curl \left[\frac{\bfield\spacetime}{\mu\spacetime}\right] - \tder\left[\epsilon\spacetime\efield\spacetime\right] &= \boldsymbol{J}\spacetime \label{eq: maxwell 8} 
+\end{align}
+
+
+\subsection{Optical Coherence}
+Until now we have restricted ourselves to the case of idealised monochromatic or polychromatic plane-wave sources where the ensemble of electromagnetic fields, $\Psi$, contains only a single disturbance \footnote{Here $\Psi$ is used to represent the ensemble set of electromagnetic fields at some point in time, where we have intentionally evoked notions similar to the continuous quantum mechanical wavefunctions describing the probabilistic set of states of the EM field.}. In reality, a thorough description of X-ray wavefields must admit that the quantum and thermal processes that govern the emission of X-ray fields are inherently probabilistic \footnote{this is not to mention the probabilistic nature of the interaction of fields with matter} and the resulting X-ray wavefields are stochastic - we label these fields to be partially coherent and note that coherence is achieved in the limit that the density of the random fluctuations (both spatial and temporal) approaches 0, and incoherent as this density approaches infinity (is this even valid?). This discussion of coherence is pertinent to the case of XFEL wavefields generated by the quasi-spontaneous emmission of thermal distributions of relativistic electrons, where the field ensemble measured at the exit of the undulator is populated by couple radiation fields from large numbers of individual emmitters with phases that fluctuate randomly in spacetime.\\
+
+To describe the degree of coherence of an ensemble of electromagnetic field disturbances, we contrive the following illustrative case: Consider a set of emmitters occupying a small volume and radiating quasi-monochromatic light at a mean wavelength $\bar{\lambda}$. For now, we consider the radiation of each emmitter to be statistically stationary in the wide-sense: the correlation between any two temporal realisations of that field depends only on the time-lag between the realisations \footnote{nonetheless, it is significant that we hold that this cannot always be assumed for XFEL wavefields.} Suppose the emmitting volume is stationary and located upstream of an thin opaque screen with a pair of pinhole perforations at locations $\boldsymbol{r}_{\perp,1} = (x_1,y_1)$ and $\boldsymbol{r}_{\perp,2} = (x_2,y_2)$ in the transverse plane. The position vector describing the relative displacement of the pinholes is therefore given: $\Delta\boldsymbol{r}_\perp = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. We consider a single-pixel (bucket) detector located some distance \dz\q downstream and let $\rpara_{,1}$ and $\rpara_{,2}$ be the paths between each pinhole and the detector. The resulting disturbance measured at the detector is effectively a two-point correlation measurement of the wavefield $E_\Phi$(x,y,z=0) in the plane of incidence with the screen.\\
+
+%The statement of quasis-monochromaticity is equivalent to saying that the non-zero components of the analytical signal lie within a small bandwidth on the interval $\bom - \half\Delta\om \leq \om \leq \bom + \half\Delta\om$
+%\begin{equation}
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half \Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%\end{equation}
+
+
+%\begin{equation}\label{eq: quasi-monochromatic signal}
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%\end{equation}
+%restricting the limits of integration to enclose only the non-negligible components of the analytical signal: $\om = \bom+\delta\om$, the \eqn{\ref{eq: quasi-monochromatic signal}} becomes:
+
+%\begin{equation}\label{eq: quasi-monochromatic signal}
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%\end{equation}
+%%%
+The disturbance measured at the detector corresponds to the time-averaged interference pattern of disturbances $E_1(x_1,y_1,z=0,t)$ and $E_2(x_2,y_2,z=0,t)$ emanating from each pinhole. If the enemble field $E_\Phi$ is a plane-wave the nature of the superposition of the fields is determined by the path difference $\Delta\rpara = \|\rpara_{,2}-\rpara_{,1}\|$ which will be constructive or destructive when $\Delta\rpara = 0$ or 1, respectively. The phase retardations are a consequeunce of the finite speed of light in a vacuum, c. Knowing this, we can write the measured wavefield, $E_3(x_3, y_3, z=\dz,t)$:
+
+\begin{align}\label{eq: superimposed field}
+\notag E_3(x_3, y_3, z=\dz,t) &= K_1E(x_3,y_3,z=\dz, t-\frac{\rpara_{,1}}{c}) \\ &+ K_2E(x_3,y_3,z=\dz, t-\frac{\rpara_{,2}}{c}),
+\end{align}
+
+\noindent where $K_1$ and $K_2$ are complex numbers encapsulating information about the diffraction from the pinholes, scattering angles etc. The intensity of the recorded disturbance is given by the ensemble average of the square-modulus of \eqn{\ref{eq: superimposed field}}:
+
+\begin{align}\label{eq: intensity interference}
+    \notag I(x_3,y_3,z=\dz) &= \left\langle \left\| K_1E(x_3,y_3,z=\dz, t-\frac{\rpara_{,1}}{c}) + K_2E(x_3,y_3,z=\dz, t-\frac{\rpara_{,2}}{c}) \right\| \right\rangle \\
+    \notag &= I_1(x_1,y_1,z=0) + I_2(x_2,y_2,z=0) \\ &+ 2\mod{K_1K_2*}Re\left\langle E_1(x_1,y_1,z=0, t-\Delta t)E*(x_2,y_2,z=0, t)\right\rangle.
+\end{align}
+
+\noindent where $K_2*$ denotes the complex conjugate of $K_2$ and the angular brackets are used to denote the ensemble average over time. In the absence of either one of the pinholes, it is evident that \eqn{\ref{eq: intensity interference}} is reduced to the intensity pattern of the remaining pinhole. Note that we have written the time difference $\Delta t = \frac{\rpara_{,2}-\rpara_{,1}}{c}$. Importantly, the recorded intensity is defined by the interference term on the RHS of \eqn{\ref{eq: intensity interference}}, which is the correlation of the two-fields at the pinholes, where the phase-shift due to an optical path difference has been imposed. We define this to be the mutual coherence function, $G$, which is a function of the location of each pinhole in the transverse plane:
+
+\begin{equation}\label{eq: mutual coherence function}
+G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t) = \left\langle E_1(x_1,y_1,z_1, t-\Delta t)E*(x_2,y_2,z_2, t)\right\rangle,
+\end{equation}
+\noindent where we have now relaxed the condition that each of the pinholes exist in the same transverse plane. The mutual coherence function (\eqn{\ref{eq: mutual coherence function}} predicts the visibility of fringes in a diffraction experiement (\ie Young's Double Slit experiment) and is therefore a measure of the correlation of any two points of a field, or ensemble of, that can be directly measured. Normalising the mutual coherence function gives the complex degree of coherence, $g$:
+
+\begin{align}\label{eq: complex degree of coherence}
+\notag g(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t) &= \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t)}{\sqrt{G(x_1, y_1, z_1, t = 0)G(x_2, y_2, z_2, t = 0)}} \\
+& = \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t)}{\sqrt{I_1(x_1,y_1,z_1,t=0) I_2(x_2,y_2,z_2,t=0)}}
+\end{align}
+\noindent which describes the coherence of the source on the interval $g \in [0,1]$, where $g = 0$ and $g = 1$ denote incoherence and coherence respectively.\\
+
+Finally, we seek to generalise \eqn{\ref{eq: complex degree of coherence}} by noting that such a correlation measurement is suitable for any wavefield described in real-space and can be liberated from the need for a suitable interferometric experiment. For an statistically stationary x-ray wavefield in a volume of free-space, $\ohm$, the complex degree of coherence of the field can be described for any set of coordinates $\br_1, \br_2 \in \ohm$ without the need for measurement \footnote{Although we are note restricted to thecase of a pair of points and in some circumstances are only capable of observing wavefield coherence structures (\ie phase-vortices) using higher order correlation functions}.
+
+
+
+
+
+
+
+
+
+
+ 
 \subsection{XFEL Radiation}
 \subsubsection{Fundamentals of Synchrotron Radiation}
 \subsubsection{The SASE Process}
@@ -161,8 +294,128 @@ allowing the free-space propagator \D to be re-written for the propagation of pa
 
 
 \subsection{The Coherent Source Model}
-\subsubsection{Description of the Coherent Source Model}
-\subsubsection{Validation of the Coherent Source Model}
+
+\subsubsection{Description and Validation of the Analytical Source Model}
+Here we describe the construction and validation of a coherent source model that enables a study of the influence of the optical transport system in the absence of the implications of partial coherence. We note that this source provides a description of the shape and size of the SPB-SFX source using analytical data, but is a poor descriptor of the stochastic nature of XFEL pulses.\\ 
+
+\noindent We begin with a Gaussian source defined in $\mathcal{R}^3$ at the undulator exit:
+
+\begin{align}\label{eq: gaussian pulse}
+\notag E(x,y,z = z, t) &= \frac{4E_0}{\tau\sqrt{2\pi}} \frac{2\sigma_0}{2\sigma}\exp\left[\frac{(x^2+y^2)}{2\sigma^2}\right]\exp\left[\frac{k\sqrt{(x^2+y^2)}}{2R(z)}\right]\\
+&\times \exp\left[ikz\right]\exp\left[\left(\frac{-2t}{\tau}\right)\2\right]
+\end{align}
+
+\noindent where $2\sigma_0$ is the beam width at its waist, which we define to be some distance $z > 0$ upstream of the undulator exit \footnote{where we recognise that the issue of true-source point is rarely solved for XFEL sources}, $2\sigma$ is the beam radius a distance, z, downstream of the beam waist, $E_0 = E(x=0,y=0,z = 0, t = 0)$  and $\tau$ is the duration of the Gaussian pulse. Recognising that the radius of curvature of the beam, $R(z)$ can be written in terms of the beam divergence, $\theta$:
+
+\begin{equation}\label{eq: gaussian radius of curvature}
+    R(z) = z\left[1+\frac{\lambda}{\pi z\theta^2}\right].
+\end{equation}
+
+With the goal of building a Gaussian beam model with properties defined by analytical models, we aim to describe the beam in terms of measurable quantities, \ie we aim to write \eqn{\ref{eq: gaussian pulse}} in terms of $2\sigma$ and $\theta$. Moving forward, we note that
+
+\begin{align}
+    2\sigma_0 &= \frac{2\sigma}{\sqrt{1+\frac{z\pi\theta^2}{\lambda}}} = \frac{\lambda}{\pi\theta}\label{eq: definition of beam waist} \\
+    \tf z &= \sqrt{\frac{\pi\theta^2 2\sigma^2}{\lambda}-1}
+\end{align}
+allowing the inner of the second exponent on the RHS of \eqn{\ref{eq: gaussian pulse}} to be written:
+ 
+\begin{equation}\label{eq: middle exponent of gaussian beam}
+     \frac{k\sqrt{(x^2+y^2)}}{2R(z)} = 
+    \frac{k\sqrt{x\2+y\2}}{2}\left(\frac{\pi\theta\22\sigma^2}{\lambda}+\frac{4\lambda\2}{\pi\2\theta^4}-1\right)^{-\frac{1}{2}} = \frac{k\sqrt{x\2+y\2}}{2\sqrt{\alpha}}
+\end{equation}
+
+\noindent allowing us to re-write \eqn{\ref{eq: gaussian pulse}}:
+\begin{align}\label{eq: gaussian pulse solution}
+\notag E(x,y,z = z, t) &=  \frac{E_0\lambda}{2\sigma\pi\theta}\exp\left[\frac{(x^2+y^2)}{2\sigma^2}\right]\\ 
+&\times \exp\left[\frac{k\sqrt{x\2+y\2}}{2\sqrt{\alpha}}\right]\exp\left[ikz\right]\exp\left[\left(\frac{-2t}{\tau}\right)\2\right]
+\end{align}
+
+The total power of the field $E$\spatial is defined by the intensity:
+
+\begin{equation}
+    P_0 = \frac{1}{2}\pi I_0 2\sigma_0\2 = \frac{1\|E_0\|^2\lambda\2}{2\pi\theta\2}
+\end{equation}
+
+where the energy of the pulse is therefore:
+
+\begin{equation}
+    \notag U = \int_{-\tau/2}^{+\tau/2}P_0(t)= \frac{\tau^2\lambda\2}{\pi\theta\2}\|E_0\|
+\end{equation}
+
+Setting $U, \sigma,\theta = U_A, \sigma_A, \theta_A$, we define the analytical model of a pulsed Gaussian beam, $E_A$:
+
+\begin{align}\label{eq: gaussian pulse solution}
+\notag E_A(x,y,z = z, t) &=  \sqrt{\frac{\pi^2\theta\2U_A}{\tau\lambda\2}}\frac{\lambda}{2\sigma_A\pi\theta_A}\exp\left[\frac{(x^2+y^2)}{2\sigma_A^2}\right]\\ 
+&\times \exp\left[\frac{k\sqrt{x\2+y\2}}{2\sqrt{\alpha_A}}\right]\exp\left[ikz\right]\exp\left[\left(\frac{-2t}{\tau}\right)\2\right]
+\end{align}.
+
+Analytical fits of the properties of the SASE1 undulator at the European synchrotron are given as a function of electron beam charge and photon energy in \cite{sinn_x-ray_2011} for photon energies in the range 5 keV -40 keV. In pursuit of a geometric model of the SASE1 source, we assess the validity of \eqn{\ref{eq: gaussian pulse solution}} for beam properties defined by the analytical trends:
+
+\begin{align}
+    \label{eq: analytical pulse width} \sigma_A [\mu m] &=  a^{-1} 6\ln\left(\frac{6000}{\lambda[nm]} \right)\\ %%%% note need to change this to ratio w/ intensity
+    \label{eq: analytical pulse divergence} \theta_A [\mu rad] &=  a^{-1} \left(13.9 - 5.17 Q[nC]\lambda[nm]^{0.85}\right)\\
+    \label{eq: analytical pulse energy} U_A[mJ] &=  15.4 Q[nC]\lambda[nm]\\
+    \label{eq: analytical pulse duration} \tau_A[fs] &= \frac{10^3 Q[nC]}{9.8}
+\end{align}
+
+\noindent where Q is the electron beam bunch charge, square brackets denote units and $a = \frac{1}{\sqrt{2ln(2)}}$ is a conversion factor between the Gaussian beam width and full-width-half-maximum (FWHM): $\sigma = \frac{FWHM}{a}$.\\
+
+We define the energy of an arbitrary pulse, $E\spacetime$ to be the sum of transverse intensities intersecting some longitudinal plane, z, integrated over the duration of the pulse:
+
+\begin{equation}\label{eq: definition of pulse energy}
+    U(z) = \iint E(x,y,z,t) dxdydt.
+\end{equation}
+
+For calculation of the beam width and divergence, we choose to define the encircled energy of a beam in spherical coordinates:
+
+\begin{equation}\label{eq: encircled energy}
+    E(r) = \frac{\int_0^r I(r') 2\pi r' dr'}{\int_0^\infty I(r') 2\pi r' dr'},
+\end{equation}
+\noindent and solve for r:
+
+\begin{equation}\label{eq: enclosed energy algorithm}
+    \argmin_{x\in\mathcal{R}} \left\|\frac{\int_0^r I(r') 2\pi r' dr'}{\int_0^\infty I(r') 2\pi r' dr'} - 0.5 \right\|
+\end{equation}
+so that the beam size is defined by a radius enclosing 50\% of the total beam intensity, centred at the center-of-mass of the beam, $\boldsymbol{r}_0$:
+
+\begin{equation}\label{eq: beam com}
+    \boldsymbol{r}_0 = \frac{1}{\int I_z(\boldsymbol{r})d\boldsymbol{r}}\int I(\boldsymbol{r})\boldsymbol{r} d\boldsymbol{r}.
+\end{equation}
+
+\noindent We note that this can be related to the width of a Gaussian beam which has an encircled energy, U(r):
+
+\begin{equation}\label{eq: encircled energy of a gaussian}
+    U(r) = 1-\exp\left[-2\left(\frac{r}{2\sigma}\right)\2\right]
+\end{equation}
+setting $E(r) = 0.5$
+
+\begin{align}
+\notag    \frac{r}{2\sigma} &= \sqrt{\frac{\log(0.5)}{-2}} \approx 0.588 \\
+\tf 2\sigma &= \frac{r}{\sqrt{\frac{\log(0.5)}{-2}}}.
+\end{align}
+
+Finally, we define the beam divergence from its FWHM of the electric field in k-space:
+
+\begin{align}
+    \notag \hat{E}(\kx,\ky) &= \frac{1}{2\pi}\iint E(x,y)\exp\left[-i\left(\kx x + \ky y\right)\right] dxdy \\
+    &= \ifourier\left[\hat{E}(\kx,\ky)\right]
+\end{align}
+
+where we solve for $\theta = a^{-1}k_\perp$:
+
+\begin{equation}
+    \argmin_{k_\perp\in\mathcal{R}} \left\|\frac{\hat{E}(0)}{\hat{E}(k_\perp)}-\frac{1}{2}  \right\|. 
+\end{equation}
+
+Figure \ref{f: coherent source properties} compares the modelled properties of the beam with analytical expectations and demonstrates the suitably of \eqn{\ref{eq: gaussian pulse solution}} in representing the analytical properties of the SASE1 undulator at the European XFEL in the energy range 5 keV - 40 keV.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/coherent_source_properties.png}
+\caption{Comparison of the pulsed Gaussian beam model described in \eqn{\ref{eq: gaussian pulse solution}} and the prescribed analytical beam a) divergence, b) pulse energy, c) pulse duration and d) 2$\sigma$ pulse-width. Error bars in d) correspond to the error associated with implementation of \eqn{\ref{eq: enclosed energy algorithm}}}
+\label{f: coherent source properties}
+\end{figure}
+
 
 \subsection{Modelling Beamline Optics}
 \subsubsection{Description and Validation of the Mirror Materials}
