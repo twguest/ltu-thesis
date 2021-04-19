@@ -1,44 +1,13 @@
-\hinttext{This is where the actual thesis begins. Explain the field of research and how your work fits in. Try to answer to the reader how your contributions provide new insights. However, keep this simple. Assume that the reader has only a very basic understanding of the field. Try to use lingo and terms that do not need to be explained. You may use forward references. But use them sparingly. You do not want the reader to frequently flip ahead 100 pages!}
+The development of X-ray Free Electron Laser (FEL) facilities has been motivated by the promise of single-particle imaging (SPI) of biomolecules at atomic-scale resolutions  \cite{oberthur_biological_2018}  as an extension to contemporary macromolecular crystallography (MX) techniques using third-generation synchrotron light sources. While the theoretical resolution limit of hard x-ray FEL SPI experiments ($\approx 3 $\AA) improves upon the diffraction limits of optical ($\approx 200$ nm) and electron ($\approx$ 1 nm – 10 nm)  microscopies \cite{spence_high-resolution_2017}, the small scattering cross section of organic materials in the hard x-ray regime \cite{henke_x-ray_1993} necessitates samples to be crystalised to improve diffraction efficiencies \cite{spence_x-ray_2012}. 
 
+The resolution of structural information obtained via MX using coherent synchrotron radiation is limited by crystal quality and radiation damage. Protein crystallography is a multivariate process and the optimisation of experimental conditions to achieve well-diffracting protein crystals is a field-in-itself \cite{drenth_principles_2007}. In general, protein structural determination is limited to the case of easily crystallised materials, restricting the scope of the technique. As in Cryogenic Electron Microscopy (Cryo-EM), radiation damage in MX is typically overcome by cryogenic freezing of the sample, which restricts the study of temporal dynamics and has been demonstrated to bias structural information \cite{fraser_accessing_2011}.\\
 
-\section{Contributions}
-\label{s:Contributions}
+The use of X-ray Free Electron Lasers (XFELs) light sources in structural biology is predicated on the principle that high-flux X-ray sources provide sufficient scattering signal from amorphous materials to circumvent the need for crystallisation \cite{starodub_dose_2008}. While it was initially believed that the radiation dose required for high-resolution elastic scattering would lead to inelastic processes that destroy the molecule during imaging, theoretical work \cite{solem_imaging_1986} suggested that sufficiently short X-ray pulses could outrun the sample damage process. This has since been demonstrated in simulation \cite{neutze_potential_2000} and experiment \cite{chapman_femtosecond_2006} and has encouraged the construction of dedicated SPI instruments at LCLS \cite{boutet_coherent_2011} and the European XFEL \cite{mancuso_single_2019}).
 
-Our key contributions include:
+Remediation of strict sample requirements in X-ray protein structure determination enable novel approaches to structural biology. The capacity to image amorphous materials due to the high-brightness of XFEL sources enables the study of previously unavailable classes of molecules, and the reduced dependence on sample damage mitigation due to ultra-fast pulse times allows the imaging of proteins and biomolecules in their native state. The development of the fast-repetition rate XFEL source at the European XFEL \cite{altarelli_xfel_2006} extends these science opportunities by enabling the exploration of temporal sample dynamics at megahertz intervals \cite{sobolev_megahertz_2020}.
 
-\begin{enumerate}
+Despite early successes in SPI using XFEL sources, experimental resolutions are far-removed from the theoretical minimum \cite{gunther_sequential_2011,  hantke_high-throughput_2014}. While the optimisation of XFEL imaging shares some technical analogies with conventional imaging techniques (i.e. maximisation of detector efficiency and resolution), the primary inhibitors to atomic resolution are unique to the generation and transport of XFEL sources \cite{oberthur_biological_2018}. 
 
-  \item \hinttext{List all important contributions that you intend to make.}
-  
-  \item \hinttext{Be brief!}
-  
-  \item \hinttext{The number of contributions does not have to match the number of contribution chapters.}
+The generation of photon-beams by the Self-Amplified Spontaneous Emission (SASE) radiation of relativistic electrons is an inherently stochastic process \cite{freund_principles_2018}. While transverse mode selection leads to an effectively spatially coherent source, inhomogenous broadening and energy spread result in spatially incoherent, quasi-stationary random pulses \cite{geloni_self-seeded_2020}, which manifest as pulse-to-pulse instabilities that have been implicated in the degradation of contemporary SPI applications \cite{nakano_single-particle_2018, nam_fixed_2016, nagaya_ultrafast_2016, ekeberg_single-shot_2016, ekeberg_three-dimensional_2015}. Issues regarding source fluctuations are compounded by challenges in optical transport, which impose strict fabrication requirements \cite{samoylova_requirements_2009}. 
 
-\end{enumerate}
-
-\section{Thesis Outline}
-\label{s:Outline}
-
-The remainder of this thesis is organized as follows. \hinttext{Note: Depending on your research, you will have to change the structure of the thesis. For example, if you have many contribution chapters that are only loosely related, it might be useful to have a separate related works and/or experiments section per chapter.}
-
-\begin{description}
-
-  \item[Chapter \ref{c:Background}] provides background information relevant to the field of research. \hinttext{Provide details regarding topics and concepts that you will refer to throughout the thesis and that cannot be assumed to be already known by typical readers. A background chapter is not mandatory, but chances are that you need one. See \texttt{text/ch2.tex} for details.}
-  
-  \item[Chapter \ref{c:Related-Works}] provides a detailed discussion of the major existing contributions to the field and how they relate to each other and our proposed algorithm ... \hinttext{This must be adapted depending on your research. See \texttt{text/ch3.tex} for details.}
-  
-  \item[Chapter \ref{c:Contribution-1}] details the properties and development of ... \hinttext{Write at least 1-2 sentences more to give the reader an idea what your first major contribution chapter is about. See \texttt{text/ch4.tex} for details.}
-  
-  \item[Chapter \ref{c:Contribution-2}] details the properties and development of the ... algorithm. \hinttext{Write at least 1-2 sentences more to give readers an idea what your second major contribution chapter is about. See \texttt{text/ch5.tex} for details.}
-  
-  \hinttext{Expand this list if you have further contribution chapters.}
-  
-  \item[Chapter \ref{c:Experiments}] details testing of our proposed ... algorithm in an experimental setting. \hinttext{Write at least 1-2 sentences more to give an idea what the chapter is about. See \texttt{text/ch6.tex} for details.}
-  
-  \item[Chapter \ref{c:Conclusions}] concludes this thesis. First, we summarize our work. Then, we high-
-  light interesting aspects that we did not fully cover and provide a thorough discussion of potential topics and areas, with respect to ..., that may be interesting for future research activities. \hinttext{A conclusion chapter is mandatory. Please do not copy. Rewrite this! See \texttt{text/ch7.tex} for details.}
-  
-\end{description}
-
-
-
+To maximise the capabilities of XFEL radiation, the SPI roadmap \cite{aquila_linac_2015} identifies the development of ‘drop-in’, shot-to-shot wavefield sensing mechanisms at the XFEL focus among the primary milestones in achieving atomic resolution, with the hope of future extension to parasitic, online wavefront characterisation schemes \cite{aquila_linac_2015}.  Direct measurement of XFEL focii are limited by both the insufficient spatial resolution of contemperary detectors and the damage caused. In the absence of suitable wavefront sensing mechanism, we pursuit a description of the SPB-SFX instrument focus under different operational conditions by construction of a wave-optics model. To date, no discussion of the properties of individual XFEL pulses at the instrument focus exists.
