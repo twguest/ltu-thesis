@@ -173,9 +173,9 @@ allowing us to write \ref{eq: Frensel Diffraction}
 \end{align}
 where we define \DHF to be the Huygens-Fresnel free-space propagation operator which formulates the propagated wavefield as the sum of electromagnetic disturbances propagated from each sampled point in the unpropagated plane as spherical waves (cite): 
 %%%%% note x_0 should be changed to x' but requires a latex fix re: double superscripts
-\begin{align}\label{eq: Huygens Fresnel convolution}
-\notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}\iint E_\om(x_0,y_0,z = 0) \\
-&\times\exp\{\frac{ik}{2\dz}\left[(x\2-x_0\2)+(y\2-y_0\2) \right]\}dx_0dy_0
+\begin{align}\label{eq: Huygens Fresnel convolution} 
+\notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}\iint E_\om(x',y',z = 0) \\
+&\times\exp\{\frac{ik}{2\dz}\left[(x\2-x^{\prime 2})+(y\2-y^{\prime 2}) \right]\}dx^{\prime} dy^{\prime}
 \end{align}
 The absence of  a Fourier transform on the RHS of \eqn{\ref{eq: Huygens Fresnel convolution}} provides a convenient method of circumventing sampling requirements in numerical propagation of free-space diffraction. 
 
@@ -185,87 +185,178 @@ Finally, we consider the limiting case where the propagation distance is far gre
 \begin{align}\label{eq: factorised huygens fresnel}
 \notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}
 \exp\left[\frac{ik(x\2+y\2)}{2\dz}\right]
-\iint E_\om(x_0,y_0,z = 0) \\
-&\times\exp\{\frac{ik}{2\dz}\left[(x\2-x_0\2)+(y\2-y_0\2) \right]\}dx_0dy_0
+\iint E_\om(x',y',z = 0) \\
+&\times\exp\left[\frac{ik}{2\dz}\left[(x\2-x^{\prime 2})+(y\2-y^{\prime 2})) \right]\right]dx'dy',
 \end{align}
+and define the Fresnel Criterion, F:
 
+\begin{equation}\label{eq: Fresnel Criterion}
+    F \equiv \frac{\sigma^2}{\lambda \dz}.
+\end{equation}
+When $F << 1$ the first integral in the exponent of \ref{eq: factorised huygens fresnel} vanishes and we can re-write it as the Fraunhofer diffraction integral:
 
+\begin{align}
+    \notag E_\om(x,y,z=\dz) &\approx \frac{-ik\exp(ik\dz)}{2\pi\dz}
+\exp\left[\frac{ik(x\2+y\2)}{2\dz}\right] \\
+&\times \iint E_\om(x,y,z = \dz) \exp\left[\frac{-ik}{\dz}(xx'+yy')\right]dx'dy'
+\end{align}.
+Where we define any propagation distance $\dz: F << 1$ to be farfield diffraction (and its inverse to be nearfield diffraction).
 
 
 \section{X-ray Imaging}
+
 X-ray imaging is at the core of this. X-rays are paticularly advantadges due to this, and are implemented in myriad techniques cite cite cite. In this section we describe the challenges associated with contemperary image techniques without a view of XFel specific techniques which we reserve for this section... 
 
 
 \subsection{Interaction of Light with Matter}
-The interaction of light with matter is at the center of x-ray imaging. The structural information incoded in the wavefield during the coupling of the light and matter fields enables interpretation of the three-dimensional structure of the material. Here we pursue a description of the evolution of electromagnetic fields in the presence of a scattering medium, beginning with the generalised Maxwell's equations:
+The interaction of light with matter is at the centre of x-ray imaging. The structural information incoded in the wavefield during the coupling of the light and matter fields enables interpretation of the three-dimensional structure of the material. Here we pursue a description of the evolution of electromagnetic fields in the presence of a scattering medium, beginning with the generalised Maxwell's equations:
 
 \begin{align}
     \divergence \boldsymbol{D} \spacetime &= \rho\spacetime \label{eq: maxwell 5} \\
      \curl \boldsymbol{H}\spacetime - \tder \boldsymbol{D}\spacetime &= \boldsymbol{J}\spacetime \label{eq: maxwell 6} 
 \end{align}
+
 \noindent where we have introduced the electric displacement vector, $\boldsymbol{D}$, and the magnetic field $\boldsymbol{H}$, charge density $\rho$ and current density $\boldsymbol{J}$. We note that \eqn{\ref{eq: maxwell 2}} and \eqn{\ref{eq: maxwell 3}} hold as in free-space. \eqn{\ref{eq: maxwell 5}} is Gauss' law and states the proprtionality of the charged enclosed within a surface and the lectric displacement flux through the surface. \eqn{\ref{eq: maxwell 6}} is Maxwell's modification of Gauss' law and denotes that magnetic fields can be induced by both electric current or a changing displacement field.\\
 
-In general, the displacement and induction vectors are functions of \efield and \bfield \footnote{in ferroelectric and ferromagnetic materials, $\boldsymbol{D}$ and $\boldsymbol{B}$ depend on the history of the material}. Restricting ourselves to the case of linear materials, let $\boldsymbol{D} = \epsilon\efield$ and $\bfield = \mu\boldsymbol{H}$ where $\epsilon$ and $\mu$ denote the electrical and magnetic permetivity of the materials. Hence, we can re-write Maxwell's equations in terms of \efield and \bfield:
+In general, the displacement and induction vectors are functions of \efield and \bfield \footnote{in ferroelectric and ferromagnetic materials, $\boldsymbol{D}$ and $\boldsymbol{B}$ depend on the history of the material}. Restricting ourselves to the case of linear materials, let $\boldsymbol{D} = \epsilon\efield$ and $\bfield = \mu\boldsymbol{H}$ where $\epsilon$ and $\mu$ denote the electrical and magnetic permitivity of the materials. Hence, we can re-write Maxwell's equations in terms of \efield\ and \bfield:
+
+
 \begin{align}
-    \divergence \left[\epsilon\spacetime\efield\spacetime\right] &= \rho\spacetime \label{eq: maxwell 7} \\
-     \curl \left[\frac{\bfield\spacetime}{\mu\spacetime}\right] - \tder\left[\epsilon\spacetime\efield\spacetime\right] &= \boldsymbol{J}\spacetime \label{eq: maxwell 8} 
+        \divergence \left[\epsilon\spacetime\efield\spacetime\right] &= \rho\spacetime, \label{eq: maxwell 7} \\
+       \divergence \bfield = 0, \label{eq: maxwell 8} \\
+       \curl\efield\spacetime &+ \tder\bfield\spacetime = 0, \label{eq: maxwell 9}\\
+       \curl\left[\frac{\bfield\spacetime}{\mu\spacetime}\right]-\tder\left[\epsilon\spacetime \right] &= \boldsymbol{J}\spacetime.
+     %\label{eq: maxwell 10}
 \end{align}
 
-%%%%%%% via masters
-The interaction of any material, M, with BEUV and Soft X-ray (SXR) radiation is characterised by the energy dependent complex refractive index of the material, $n$:
+Making use of the vector indentities \eqn{\ref{eq: vector identity 1}} and \eqn{\ref{eq: vector identity 2}} and assuming that $\epsilon$ and $\mu$ are time independent, \eqn{\ref{eq: maxwell 9}} becomes:
 
-\begin{equation}\label{complex_refractive_index}
-    n_M^{(E)}(x,y,z) = 1 - \delta_M^{(E)}(x,y,z) - i\beta_M^{(E)}(x,y,z).
+\begin{align}
+    \notag & \left[\epsilon\spatial\mu\spatial\ttder-\divergence\2 \right]\efield\spacetime \\
+    \notag &= \left[\divergence\ln\mu\spatial \right]\times \left[\curl\efield\spacetime \right]\\
+    &= -\divergence\left[\divergence\efield\spacetime\right]-\mu\spatial\tder\boldsymbol{J}\spacetime, 
+\end{align}
+where we have used \eqn{\ref{eq: maxwell 3}} to substitute \tder\bfield with $-\curl\efield$. Which can be reduced to the d'Alembert wave equation for a generalised medium. Assuming that the scattering medium is non-magnetic: $\mu = \mu_0$ and that there is no charge or current density present: $\rho = \boldsymbol{J} = 0$, the generalised form of the Helmholtz equation can be written:
+
+\begin{equation}\label{eq: generalised Helmholtz equation}
+    \left[\epsilon\spatial\mu_0\ttder-\divergence\2\right]\efield\spacetime = -\divergence\left[\divergence\efield\spacetime\right]
 \end{equation}
-The real and imaginary components of $n$ describe the phase and amplitude shift of a complex electric field propagated through the material and are defined by \cite{paganin_coherent_2013}:
 
+where the RHS of \eqn{\ref{eq: generalised Helmholtz equation}} can be ignored under that condition that the material is slowly varying on lengthscales the size of a wavelength:
+
+\begin{equation}\label{eq: approximate Helmholtz equation}
+    \left[\epsilon\spatial\mu_0\ttder-\grad\2\right]\efield\spacetime \approx 0.
+\end{equation}
+
+Finally, it is responsible to consider the fact that the response of a material to incident radiation is frequency dependent. We therefore re-define \eqn{\ref{eq: approximate Helmholtz equation}} using the spectral formulation (\eqn{\ref{eq: monochromatic signal}}
+
+\begin{equation}\label{eq: spectral wavefield in matter}
+    \int_0^\infty \left\{\left[ \grad\2 +\epsilon_\om\spatial\mu_0\om\2\right]E_\om(x,y,z)\right\}\carrier = 0.
+\end{equation}
+
+Clearly, the bracketed quantity in \eqn{\ref{eq: spectral wavefield in matter}} must disappear over the range of integration:
+
+\begin{equation}\label{eq: monochromatic helmholtz equation in matter}
+    \left[\grad\2 + \epsilon_\om\spatial\mu_0c\2k\2\right]E_\om\spatial = 0,
+\end{equation}
+
+\noindent where we have made use of the fact that $\omega = ck$.\\
+
+Finally, we introduce the complex refractive index of a material, $n_\om$:
+\begin{equation}\label{eq: complex refractive index}
+n_\om\spatial = c\sqrt{\epsilon_\om\spatial\mu_0} = \sqrt{\frac{\epsilon_om\spatial}{\epsilon_0}},
+\end{equation}
+\noindent yielding the inhomogeneous Helmholtz equation from \eqn{\ref{eq: monochromatic helmholtz equation in matter}}: 
+
+\begin{equation}\label{eq: inhomogeneous helmholtz equation}
+    \left[\grad\2+k\2n_\om\2\spatial\right]E_\om\spatial = 0
+\end{equation}
+\noindent which governs the scattering of each spectral component of an electric field in an inhomogeneous medium. 
+
+\subsection{The Projection Approximation}
+The projection approximation assumes that the phase perturbations imposed by a material on the incident wavefield are sufficiently weak that the phase and amplitude disturbances at the exit-surface of the material can be expressed as the aggregate of ampluitude of phase shift through the material, relative to the field in the absence of the material.\\
+
+In pursuit of an approximation of the scattering of an incident plane-wave by a local distribution of \textit{static} scatterers, consider a perturbed plane-wave solution to \eqn{\ref{eq: monochromatic helmholtz equation in matter}} defined by the spatial envelope $E_0$:
+
+\begin{equation}\label{eq: perturbed plane-wave}
+    E_\om\spatial = E_0\spatial\carrier.
+\end{equation}
+
+\noindent Substituting our perturbed plane wave (\eqn{\ref{eq: perturbed plane-wave}}) into the inhomogeneous Helmholtz equation, and making use of the vector identity \eqn{\ref{eq: vector identity 3}}, a solution to \eqn{\ref{eq: inhomogeneous helmholtz equation}} can be written in terms of the transverse and longitudinal components of the laplacian of the spatial envelope:
+
+\begin{equation}\label{eq: generalised spatial envelope in a medium}
+    \left\{2ik\frac{\partial}{\partial z} + \grad\2_\perp +\frac{\partial\2}{\partial z\2}+k\2 \left[n_\om\spatial -1 \right] \right\}E_0\spatial = 0,
+\end{equation}
+
+\noindent where we have seperated the transverse and longitudinal components of the Laplacian, \grad\2: 
+\begin{equation}\label{eq: seperated laplacian}
+    \grad\2 = \frac{\partial}{\partial z} + \grad\2_\perp.
+\end{equation}
+Recognising that the second derivative with respect to z on the RHS of \eqn{\ref{eq: generalised spatial envelope in a medium}} vanishes under the paraxial approximation, we write the inhomogeneous paraxial equation:
+
+\begin{equation}\label{eq:inhomogeneous paraxial equation}
+    \left\{2ik\frac{\partial}{\partial z}   + \grad\2_\perp +k\2 \left[n_\om\spatial -1 \right] \right\}E_0\spatial = 0,
+\end{equation}
+
+\noindent from which we derive the projection approximation by asserting that the implications of local scattering events are negligible and ignore the transverse laplacian in \eqn{\ref{eq:inhomogeneous paraxial equation}}:
+
+\begin{equation}\label{eq: projection approximation of helmholtz}
+    \left\{2ik\frac{\partial}{\partial z}  k\2 \left[n_\om\spatial -1 \right] \right\}E_0\spatial = 0
+\end{equation}
+
+\eqn{\ref{eq: projection approximation of helmholtz}} implies that the evolution of the electric-field envelope through a material is defined by the complex refractive index of the material:
+
+\begin{equation}
+    \frac{\partial}{\partial z}E_0\spatial \approx \frac{k}{2i}\left[1-n\2_\om\spatial\right]E\spatial,
+\end{equation}
+\noindent which we use to obtain the projection approximation describing the evolution of an optical field through a distance \dz\ of an inhomogeneous material:
+
+\begin{equation}\label{eq: projection approximation complex refractive}
+E(x,y,z = \dz) = exp\left\{\frac{k}{2i}\int_{z = 0}^{z=\dz}\left[1-n_\om\2\spatial\right]dz\right\}E_0(x,y,z=0)
+\end{equation}.
+
+\eqn{\ref{eq: projection approximation complex refractive}} is the primary solution of this subsection and will be utilised further in Chapter \ref{The SPB-SFX Mode} to model the transmission of an XFEL beam through a cascaded optical system. Before moving forward, we close our discussion of the interaction of light with matter by presenting the predictions of the projection approximation. Firstly, we decompose the complex refractive index into its real and imaginary components, $\delta_\omega$ and $\beta_\om$:
+
+\begin{align}
+\label{eq: complex refractive index} 1-n\2_\om \spatial &= 2\left[\delta_\om\spatial - i\beta_\om\spatial \right]\\
+\label{eq: projection approximation} \tf E(x,y,z = \dz) &= exp\left\{-ik\int_{z = \tf 0}^{z=\dz}\left[\delta_\om\spatial - i\beta_\om\spatial\right]dz\right\}\\
+\notag &\times E_0(x,y,z=0).
+\end{align}
+
+the subsequent phase and intensity shifts, $\delta\phi$ and $\delta I$, imparted on a material of uniform thickness $\int dz = T$ are therefore:
+
+\begin{align}
+    \label{eq: phase shift} \delta \phi (x,y) &= -K\int\delta_\om\spatial dz = -k\delta_\om T(x,y)\\
+    \label{eq: intensity shift} \delta I (x,y, z = \dz) &= \left[-2k\int\beta_\om\spatial dz \right]I_0(x,y,z=0)
+\end{align}
+\noindent where the scattering factors are defined:
 \begin{align}\label{Eqn: Scattering Factors}
-\delta &= \frac{r_e \lambda^2 n_e}{2\pi}, \text{and}\\
-\beta &=  \frac{\mu^{(E)}_M}{2k},
+\delta_\om &= \frac{r_e \lambda^2 n_e}{2\pi}\\
+\beta_\om &=  \frac{\mu_\om}{2k},
 \end{align}
-where $r_e$ is the classical electron radius, $n_e$ the electron density in the material and $\upmu$ the material's absorption coefficient, which is defined by the Beer-Lambert law:
-\begin{equation}\label{absorption_coeff}
-    I(x) = I_0 exp\left[-\mu_M^{E} x\right].
-\end{equation}
+where $r_e$ is the classical electron radius, $n_e$ the electron density in the material and $\mu_\om$ the material's absorption coefficient, which is defined by the Beer-Lambert law:
 
-
-An incident wavefield $\psi(x,y,z = 0)$ entering a material, M, with a spatially dependent thickness $\tau(x,y): 0 < \tau \leq z_0$, takes the form in the exit plane:
-\begin{equation}
-\begin{aligned}
-    \psi(x,y,z = z_0) = &exp\left\{-ik\int_{z = 0}^{z = z_0} \left[\delta_M^{(E)}(x,y,z) - i\beta_M^{(E)}(x,y,z)\right]dz\right\} \\ &\times \psi(x,y,z = 0),
-\end{aligned}
-\end{equation}
-where the phase and amplitude perturbations imparted on the the incident wavefield by the material are given:
-\begin{equation}
-    \Delta\psi(x,y) = k \delta^{(E)}_M \tau(x,y),
-\end{equation}
-and
-\begin{equation}
-    I(x,y,z = z_0) = exp \left[-2k \int_{z = 0}^{z = z_0} \beta_M^{(E)}(x,y,z) dz\right]I(x,y,z = 0).
-\end{equation}
-%%%%%%% 
-
-\subsection{Optical Coherence}
+\subsection{Optical Coherence}\label{s: optical coherence theory}
 Until now we have restricted ourselves to the case of idealised monochromatic or polychromatic plane-wave sources where the ensemble of electromagnetic fields, $\Psi$, contains only a single disturbance \footnote{Here $\Psi$ is used to represent the ensemble set of electromagnetic fields at some point in time, where we have intentionally evoked notions similar to the continuous quantum mechanical wavefunctions describing the probabilistic set of states of the EM field.}. In reality, a thorough description of X-ray wavefields must admit that the quantum and thermal processes that govern the emission of X-ray fields are inherently probabilistic \footnote{this is not to mention the probabilistic nature of the interaction of fields with matter} and the resulting X-ray wavefields are stochastic - we label these fields to be partially coherent and note that coherence is achieved in the limit that the density of the random fluctuations (both spatial and temporal) approaches 0, and incoherent as this density approaches infinity (is this even valid?). This discussion of coherence is pertinent to the case of XFEL wavefields generated by the quasi-spontaneous emmission of thermal distributions of relativistic electrons, where the field ensemble measured at the exit of the undulator is populated by couple radiation fields from large numbers of individual emmitters with phases that fluctuate randomly in spacetime.\\
 
-To describe the degree of coherence of an ensemble of electromagnetic field disturbances, we contrive the following illustrative case: Consider a set of emmitters occupying a small volume and radiating quasi-monochromatic light at a mean wavelength $\bar{\lambda}$. For now, we consider the radiation of each emmitter to be statistically stationary in the wide-sense: the correlation between any two temporal realisations of that field depends only on the time-lag between the realisations \footnote{nonetheless, it is significant that we hold that this cannot always be assumed for XFEL wavefields.} Suppose the emmitting volume is stationary and located upstream of an thin opaque screen with a pair of pinhole perforations at locations $\boldsymbol{r}_{\perp,1} = (x_1,y_1)$ and $\boldsymbol{r}_{\perp,2} = (x_2,y_2)$ in the transverse plane. The position vector describing the relative displacement of the pinholes is therefore given: $\Delta\boldsymbol{r}_\perp = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. We consider a single-pixel (bucket) detector located some distance \dz downstream and let $\rpara_{,1}$ and $\rpara_{,2}$ be the paths between each pinhole and the detector. The resulting disturbance measured at the detector is effectively a two-point correlation measurement of the wavefield $E_\Phi$(x,y,z=0) in the plane of incidence with the screen.\\
+To describe the degree of coherence of an ensemble of electromagnetic field disturbances, we contrive the following illustrative case: Consider a set of emmitters occupying a small volume and radiating quasi-monochromatic light at a mean wavelength $\bar{\lambda}$. For now, we consider the radiation of each emmitter to be statistically stationary in the wide-sense: the correlation between any two temporal realisations of that field depends only on the time-lag between the realisations \footnote{nonetheless, it is significant that we hold that this cannot always be assumed for XFEL wavefields.} Suppose the emmitting volume is stationary and located upstream of an thin opaque screen with a pair of pinhole perforations at locations $\boldsymbol{r}_{\perp,1} = (x_1,y_1)$ and $\boldsymbol{r}_{\perp,2} = (x_2,y_2)$ in the transverse plane. The position vector describing the relative displacement of the pinholes is therefore given: $\divergence\beta\boldsymbol{r}_\perp = \sqrt{(x_2-x_1)^2+(y_2-y_1)^2}$. We consider a single-pixel (bucket) detector located some distance \dz downstream and let $\rpara_{,1}$ and $\rpara_{,2}$ be the paths between each pinhole and the detector. The resulting disturbance measured at the detector is effectively a two-point correlation measurement of the wavefield $E_\Phi$(x,y,z=0) in the plane of incidence with the screen.\\
 
-%The statement of quasis-monochromaticity is equivalent to saying that the non-zero components of the monochromatic signal lie within a small bandwidth on the interval $\bom - \half\Delta\om \leq \om \leq \bom + \half\Delta\om$
+%The statement of quasis-monochromaticity is equivalent to saying that the non-zero components of the monochromatic signal lie within a small bandwidth on the interval $\bom - \half\delta\om \leq \om \leq \bom + \half\delta\om$
 %\begin{equation}
-%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half \Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half \delta\om}^{\bom+\half\delta\om}E_\om\carrier d\om 
 %\end{equation}
 
 
 %\begin{equation}\label{eq: quasi-monochromatic signal}
-%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\delta\om}^{\bom+\half\delta\om}E_\om\carrier d\om 
 %\end{equation}
 %restricting the limits of integration to enclose only the non-negligible components of the monochromatic signal: $\om = \bom+\delta\om$, the \eqn{\ref{eq: quasi-monochromatic signal}} becomes:
 
 %\begin{equation}\label{eq: quasi-monochromatic signal}
-%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\Delta\om}^{\bom+\half\Delta\om}E_\om\carrier d\om 
+%    E(x,y,t) = \frac{1}{\sqrt{2\pi}}\int_{\bom-\half\delta\om}^{\bom+\half\delta\om}E_\om\carrier d\om 
 %\end{equation}
 %%%
-The disturbance measured at the detector corresponds to the time-averaged interference pattern of disturbances $E_1(x_1,y_1,z=0,t)$ and $E_2(x_2,y_2,z=0,t)$ emanating from each pinhole. If the enemble field $E_\Phi$ is a plane-wave the nature of the superposition of the fields is determined by the path difference $\Delta\rpara = \|\rpara_{,2}-\rpara_{,1}\|$ which will be constructive or destructive when $\Delta\rpara = 0$ or 1, respectively. The phase retardations are a consequeunce of the finite speed of light in a vacuum, c. Knowing this, we can write the measured wavefield, $E_3(x_3, y_3, z=\dz,t)$:
+The disturbance measured at the detector corresponds to the time-averaged interference pattern of disturbances $E_1(x_1,y_1,z=0,t)$ and $E_2(x_2,y_2,z=0,t)$ emanating from each pinhole. If the enemble field $E_\Phi$ is a plane-wave the nature of the superposition of the fields is determined by the path difference $\delta\rpara = \|\rpara_{,2}-\rpara_{,1}\|$ which will be constructive or destructive when $\delta\rpara = 0$ or 1, respectively. The phase retardations are a consequeunce of the finite speed of light in a vacuum, c. Knowing this, we can write the measured wavefield, $E_3(x_3, y_3, z=\dz,t)$:
 
 \begin{align}\label{eq: superimposed field}
 \notag E_3(x_3, y_3, z=\dz,t) &= K_1E(x_3,y_3,z=\dz, t-\frac{\rpara_{,1}}{c}) \\ &+ K_2E(x_3,y_3,z=\dz, t-\frac{\rpara_{,2}}{c}),
@@ -275,19 +366,19 @@ The disturbance measured at the detector corresponds to the time-averaged interf
 
 \begin{align}\label{eq: intensity interference}
     \notag I(x_3,y_3,z=\dz) &= \left\langle \left\| K_1E(x_3,y_3,z=\dz, t-\frac{\rpara_{,1}}{c}) + K_2E(x_3,y_3,z=\dz, t-\frac{\rpara_{,2}}{c}) \right\| \right\rangle \\
-    \notag &= I_1(x_1,y_1,z=0) + I_2(x_2,y_2,z=0) \\ &+ 2\|K_1K_2^*\|Re\left\langle E_1(x_1,y_1,z=0, t-\Delta t)E*(x_2,y_2,z=0, t)\right\rangle.
+    \notag &= I_1(x_1,y_1,z=0) + I_2(x_2,y_2,z=0) \\ &+ 2\|K_1K_2^*\|Re\left\langle E_1(x_1,y_1,z=0, t-\delta t)E*(x_2,y_2,z=0, t)\right\rangle.
 \end{align}
 
-\noindent where $K_2^*$ denotes the complex conjugate of $K_2$ and the angular brackets are used to denote the ensemble average over time. In the absence of either one of the pinholes, it is evident that \eqn{\ref{eq: intensity interference}} is reduced to the intensity pattern of the remaining pinhole. Note that we have written the time difference $\Delta t = \frac{\rpara_{,2}-\rpara_{,1}}{c}$. Importantly, the recorded intensity is defined by the interference term on the RHS of \eqn{\ref{eq: intensity interference}}, which is the correlation of the two-fields at the pinholes, where the phase-shift due to an optical path difference has been imposed. We define this to be the mutual coherence function, $G$, which is a function of the location of each pinhole in the transverse plane:
+\noindent where $K_2^*$ denotes the complex conjugate of $K_2$ and the angular brackets are used to denote the ensemble average over time. In the absence of either one of the pinholes, it is evident that \eqn{\ref{eq: intensity interference}} is reduced to the intensity pattern of the remaining pinhole. Note that we have written the time difference $\delta t = \frac{\rpara_{,2}-\rpara_{,1}}{c}$. Importantly, the recorded intensity is defined by the interference term on the RHS of \eqn{\ref{eq: intensity interference}}, which is the correlation of the two-fields at the pinholes, where the phase-shift due to an optical path difference has been imposed. We define this to be the mutual coherence function, $G$, which is a function of the location of each pinhole in the transverse plane:
 
 \begin{equation}\label{eq: mutual coherence function}
-G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t) = \left\langle E_1(x_1,y_1,z_1, t-\Delta t)E*(x_2,y_2,z_2, t)\right\rangle,
+G(x_1, y_1, z_1; x_2, y_2, z_2; \delta t) = \left\langle E_1(x_1,y_1,z_1, t-\delta t)E*(x_2,y_2,z_2, t)\right\rangle,
 \end{equation}
 \noindent where we have now relaxed the condition that each of the pinholes exist in the same transverse plane. The mutual coherence function (\eqn{\ref{eq: mutual coherence function}} predicts the visibility of fringes in a diffraction experiement (\ie Young's Double Slit experiment) and is therefore a measure of the correlation of any two points of a field, or ensemble of, that can be directly measured. Normalising the mutual coherence function gives the complex degree of coherence, $g$:
 
 \begin{align}\label{eq: complex degree of coherence}
-\notag g(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t) &= \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t)}{\sqrt{G(x_1, y_1, z_1, t = 0)G(x_2, y_2, z_2, t = 0)}} \\
-& = \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \Delta t)}{\sqrt{I_1(x_1,y_1,z_1,t=0) I_2(x_2,y_2,z_2,t=0)}}
+\notag g(x_1, y_1, z_1; x_2, y_2, z_2; \delta t) &= \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \delta t)}{\sqrt{G(x_1, y_1, z_1, t = 0)G(x_2, y_2, z_2, t = 0)}} \\
+& = \frac{G(x_1, y_1, z_1; x_2, y_2, z_2; \delta t)}{\sqrt{I_1(x_1,y_1,z_1,t=0) I_2(x_2,y_2,z_2,t=0)}}
 \end{align}
 
 \noindent which describes the coherence of the source on the interval $g \in [0,1]$, where $g = 0$ and $g = 1$ denote incoherence and coherence respectively.\\
@@ -304,12 +395,9 @@ Begin with a paraxial complex scalar partially coherent wavefield, $\psi_\omega$
 \psi_\om &= \left\{ E_\omega^{{j}}(x,y) c^{(j)} \right\}\\
 \Psi &= \int \psi_\om(x,y) d\om.
 \end{align}
-\noindent $\Psi$ is the sum of each of the monochromatic components (\ie those obtained from a polychromatic wavefield via \eqn{\ref{eq: monochromatic signal}}) each of which is comprised of the modal contributions of the source at frequency, \om. To maintain generality, we allow $\Psi$ to be the ensemble of all disturbances emmitted from some stochastic source, where the relative weight of the $j^{th}$ contributing emission element to the ensemble is defined to be $c^{(j)}$. For now, we do not restrict $c^{(j)}$ to have any dependence on spectral frequency.\\
+\noindent $\Psi$ is the sum of each of the monochromatic components (\ie those obtained from a polychromatic wavefield via \eqn{\ref{eq: monochromatic signal}}) each of which is comprised of the modal contributions of the source at frequency, \om. To maintain generality, we allow $\Psi$ to be the ensemble of all disturbances emmitted from some stochastic source, where the relative weight of the $j^{th}$ contributing emission element to the ensemble is defined to be $c^{(j)}$. We note that a the coherence of a system can be modelled by appropriate choice of modal basis and the associated weightings of each orthogonal field, for example: Gaussian Schell Model and Cosine-Gaussian Schell Model Beams \cite{starikov_coherent-mode_1982, friberg_spatial_1983,coisson_gaussschell_1997,van_zandt_synthesizing_2017}. For now, we do not restrict the ensemble to form an orthogonal basis, nor $c^{(j)}$ to have any dependence on spectral frequency.\\
 
-\newcommand{\weight}{\ensuremath{c^{(j)}}}
-\newcommand{\supj}{\ensuremath{^{(j)}}}
 
-\newcommand{\CSD}{\ensuremath{W_\omega}}
 
 With the purpose of classifying the response of an imaging system to a partially coherent field, we define the cross-spectral density of the each monochromatic ensemble, \CSD:
 
@@ -339,10 +427,133 @@ Consider $\Psi$ to be a partially coherent field at the entry-plane of a linear 
 Immediately, such a description of the partially coherent wavefield permits the retrieval of a suite of coherence metrics (\ie cross-spectral density, spectral density, Wigner function, vorticity) \cite{paganin_tutorials_2019}. Within the context of contemporary X-ray imaging techniques however, we are instead concerned with the role of the coherence function of the wavefield in defining the detected intensity. While the challenges of partially coherent imaging are explored further in Chapter \ref{The SPB-SFX Mode}, we note here that the implication of \eqn{\ref{eq: intensity from SD}} and \eqn{\ref{eq: exit plane pc field}} is that the information of the coherence structure of a field is encoded in its intensity distribution. Without knowledge of the phase of the source, the coherent intensity component of any image cannot be decoupled from the coherence function of the field ensemble \cite{clark_high-resolution_2012}. From an experimental viewpoint, $I(x,y)$ is subject to averaging of each of the monochromatic components of the field over the exposure time of the detector, and the spatial averaging over each detection element.  The challenge of partially coherent imaging is therefore largely related to the generation of structure in the coherence function of the diffracted field that is unresolved in the digitalised image. Without omission of the pervasive role of image speckle in partially coherent imaging \cite{nugent_coherence_2003, vartanyants_origins_2003} we maintain that the implications of partial coherence in an imaging context pertain not to the loss-of-information, but the construction of information on length scales unresolved by the optical system \footnote{A particularly illuminating quotes is given within the context of optical fields via \cite{vartanyants_origins_2003}: "It is important to
 note that the ‘decoherence’ effect of optics is not a degradation of the inherent source coherence, but instead the
 creation of an entirely new component to the coherence
-function with a dramatically reduced coherence length."}. The ramifications of this will be further discussed in Chapter \ref{Phase-Retrieval Methods for MHz XFELs}.
+function with a dramatically reduced coherence length."}.\\
+
+The resolution of contemporary imaging techniques is limited both by the amplification of image aberrations to produce holographic speckle in coherent imaging systems \cite{chen_partial_2013, goodman_fundamental_1976,deng_coherence_2017}, and loss-of-information due to feature blurring in partially coherent imaging systems \cite{nugent_coherence_2003}. In general, diffraction based imaging techniques, \ie Coherent Diffractive Imaging (CDI) \cite{krenkel_phase-contrast_2015, zabler_optimization_2005, miao_extending_1999} and Holographic/Fresnel CDI \cite{snigirev_possibilities_1995, cloetens_holotomography_1999, williams_fresnel_2006, nugent_diffraction_2005}, require a high degree of partial coherence, which has  been extensively discussed within the context of image reconstruction and phase contrast imaging techniques \cite{gureyev_spatial_2016, vartanyants_origins_2003, hagemann_coherence-resolution_2018}. 
+
+\section{X-ray Free Electron Lasers}\label{s: X-ray Free Electron Lasers}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/xfel_brightnes.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/exfel_brightness.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+The X-ray Free Electron Laser is an optical source that lies at the nexus of laser and synchrotron technologies. Rather than laser-like production and amplification of light in an active-medium, stimulated by a master oscillator, the free electron laser operates like a vacuum-amplifier for relativistic electron bunches, which serve as the active medium. The spontaneous emission in the SASE pricess is encouraged by accelerating electrons through a strong magnetic field which acts as a master-signal for the amplification process. Self-amplification is achieved by the use of a long undulator to allow the selection of coherent radiation modes upon the coherent interaction of the electron beam with the radiated wavefield.\\
+
+\subsection{Undulator Radiation}
+We begin with an introduction to the theory of FEL amplifiers. The key element of an FEL is the undulator which produces a magnetic field that oscillates in potential along the longitudinal axis. Here, we consider the case of a helical undulator. The magnetic field in the undulator is given:
+\begin{equation}\label{eq: helical magnetic field}
+\boldsymbol{H}_u = H_{u,x}(x,y)\cos(k_u z)\hat{x} - H_{u,y}(x,y)\sin(k_u z)\hat{y}
+\end{equation}
+where $k_u$ is the wavenumber corresponding to the wavelength of the undulator period, $\lambda_u$ - \ie the wavelength and wavenumber of the oscillating magnetic field. Let each $H_u$ be the magnetic field strength in the horizontal and vertical directions, which we assume to be uniform across the face of the magnet. It is important to note that the transition from a helical undulator, as above, to a planar undulator is achieved in the case $H_{u,y}$ vanishes. An electron in the magnetic field experiences a Lorentz force, $\boldsymbol{F}$:
+
+\begin{equation}\label{eq; Lorentz Force}
+\boldsymbol{F} = q_e c^{-1} \hat{v}\times \boldsymbol{H}_u
+\end{equation}where $\hat{v}$ is the electron velocity and $q_e$ is the electron's charge. From \eqn{\ref{eq; Lorentz Force}} we are able to define the equation of motion of an electron in the undulator:
+
+\begin{align}
+m_e \gamma \frac{\partial v_x}{dt} &= q_ec^{-1}H_{u,y}(x,y)\sin(k_u z)\\
+m_e \gamma \frac{\partial v_y}{dt} &= q_ec^{-1}H_{u,x}(x,y)\cos(k_u z)
+\end{align}
+where $\gamma$ is the lorentz factor and we have decomposed the velocity into its longitudinal and transverse components.\\
+
+Let $\hat{v} = v_x + i v_y$ and note that $dz = v_z dt$, we can write the longitudinal motion of the electron in the magnetic field:
+\begin{equation}\label{eq: longitudinal electron motion}
+m_e\gamma \frac{\partial \hat{v}}{\partial z} = -iq_ec^{-1}H_u\exp(-ik_uz)
+\end{equation}Integrating \eqn{\ref{eq: longitudinal electron motion}} allows us to write the reduced electron velocity $\beta = \frac{\hat{v}}{c}$:
+
+\begin{equation}
+\frac{\hat{v}}{c} = \frac{K}{\gamma}\exp(-ik_uz)
+\end{equation}
+where we have defined the undulator parameter K:
+\begin{equation}\label{eq: undulator parameter}
+K = \frac{\lambda_u e H_u}{2\pi m_e c^2}.
+\end{equation}
+Finally, noting that $\theta_e = /\gamma$ is the rotation angle of the electron along constrained trajectory through the magnetic field, we write the equation of motion for an electron in an undulator:
+
+\begin{equation}\label{eq: equation of motion electron in undulator}
+v(z) = c\theta_e\left[\hat{x}\cos(k_u z) - \hat{y}\sin(k_u z)\right].
+\end{equation}The change in longitudinal velocity of an ensemble of electrons due to the Lorentz force imposed by an external magnetic field is the fundamental basis of undulator radiation. Having defined the equation of motion for an electron in a undulator in \eqn{\ref{eq: equation of motion electron in undulator}}, we can therefore determine the Brehmstralung (decelerating radiation) emmitted from a relativistic electron by generalising the Larmor formula:
+
+\begin{equation}\label{eq: generalised larmor formula}
+\frac{-\partial E}{\partial t} \equiv P = \frac{q_e^2\gamma^4}{6\pi\epsilon_0 c}\left[\frac{1}{c}\frac{\partial v}{\partial t} + \frac{(\beta + \dot{\beta})\2}{1-\beta\2}\right]
+\end{equation}
+\noindent where $\dot{\beta}$ is the rate of change of the reduced velocity, $\beta = \frac{v}{c}$.
+
+In an undulator, we expect the acceleration of the particle to be perpendicular to its trajectory, so that \eqn{\ref{eq: generalised larmor formula}} reduces to the synchrotron radiation equation:
+
+\begin{equation}\label{eq: synchrotron radiation equation}
+-\tder E_{a\perp v} = \frac{q_e\2a\2\gamma^4}{6\pi\epsilon_0 c^3}.
+\end{equation}
+
+
+\subsection{Interaction of an Electron Beam with an External Electric Field}
+In this section we describe the feedback process that drives the amplification of coherent radiation in the extended undulators of X-ray Free Electron Lasers. It is important to note that that optical coherence theory described in \eqn{\ref{s: optical coherence theory}} is an equally suitable description of the correlation of particle ensembles in motion. In fact, the amplification process underpinning FEL technologies is dependent on the coherence of the electron beam with its own radiation wavefield.\\
+
+Consider an optical radiation field, \efield, propagating parallel to the longitudinal direction of motion of an electron beam. Consider the field to contain only transverse radiation components: $\efield = \efield_\perp$. The energy exchange between the bunch and the radiation wavefield is due to the transverse component of the electron velocity:
+
+\begin{equation}
+\frac{\partial \mathcal{E}}{dt} = m_ec\2\frac{\partial \gamma}{\partial t} = -e\hat{v}_\perp \cdot \efield_\perp.
+\end{equation}\noindent where $\mathcal{E}$ is the kinetic energy of an electron in the beam. Let $\efield_\perp$ take the form:
+
+\begin{equation}
+\efield_\perp = E_0 \left\{\hat{x}\cos\left[\omega \left(\frac{z}{c}-t\right)\right] + \hat{y}\sin\left[\omega \left(\frac{z}{c}-t\right)\right] \right\}.
+\end{equation}
+
+Remembering that $dz = v_z dt$, we can write the change in kinetic energy of an electron in the electric field:
+
+\begin{align}\label{eq: change in kinetic energy}
+    \frac{\partial \Epsilon}{\partial t} &= \frac{-q_e}{v_z}(v_xE_x + v_yE_y) \\
+    &\approx -q_e\theta_s\cos\phi,
+\end{align}
+
+\noindent where $\phi$ is the phase angle between the transverse velocity of the particle and the field. For an effective energy exchange, the RHS of \eqn{\ref{eq: change in kinetic energy}} should remain constant, \ie $\frac{\partial\phi}{\partial t} = 0$. Hence, amplification of the XFEL radiation signal is achieved under the condition that the motion of the electron and radiation fields are synchronous, satisfying the resonance condition:
+
+\begin{align}\label{eq: XFEL resonance condition}
+    \notag \frac{\partial \phi}{\partial t} &= K_u dz + \frac{\om}{c}dz - \om dt = 0\\
+    \tf n\lambda &= \frac{\lambda_u(1+K_u\2)}{2\gamma\2}.
+\end{align}
+When this resonance condition is satisfied, electrons gain or lose energy relative to their phase-shift (lead or lag) relative to the electromagnetic field. Under the condition that the electron bunch falls in the decelerating phase of the wave, the average energy of the bunch decreases and the wave amplitude increases. The velocity modulation of the electrons due to the external field is transformed into a density modulation of the electron beam within a wavelength of the external field, and the synchrotron radiation emitted from the electrons becomes increasingly coherent as their emmissions becoming increasingly coherent with the external field. Figure \ref{f: SASE amplification} illustrates the density modulations in the electron-beam and the subsequent increase in intensity of the radiation field as electrons become increasingly bunched.
 
 
 
-\subsection{XFEL Radiation}
-\subsubsection{Fundamentals of Synchrotron Radiation}
-\subsubsection{The SASE Process}
+
+	
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/laser_diagram.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/undulator_diagrtam.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/single_pass_sase.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/literature_review/sase_amplification.png}
+\caption{}
+\label{f: SASE amplification}
+\end{figure}

@@ -25,9 +25,12 @@
 
 
  
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{longtable}
 
 % Thesis and submission:
-\newcommand{\myTitle}{XFEL Pulse Ensembles}
+\newcommand{\myTitle}{Wavefield Characterisation of MHz XFEL Pulses}
 \newcommand{\mySubmissionYear}{-}
 \newcommand{\mySubmissionMonth}{---}
 \newcommand{\mySubmissionDay}{---}
@@ -103,7 +106,14 @@
 \newcommand{\rb}{\ensuremath{\boldsymbol{r}}}
 \newcommand{\rperp}{\ensuremath{\boldsymbol{r_\perp}}}
 \newcommand{\rpara}{\ensuremath{\boldsymbol{r_\parallel}}}
+\newcommand{\weight}{\ensuremath{c^{(j)}}}
+\newcommand{\supj}{\ensuremath{^{(j)}}}
 
+\newcommand{\CSD}{\ensuremath{W_\omega}}
+
+%\usepackage{lineno}
+%\linenumbers
+%\modulolinenumbers[2]
 % -----------------------------------------------------------------------------
 
 \input{classicthesis-config}
@@ -124,17 +134,17 @@
   \onehalfspacing
   \input{text/ch0-contents}
   
-  \chapter*{Abstract}
-  \addcontentsline{toc}{chapter}{Abstract}
-  \input{text/ch0-abstract}
+  %\chapter*{Abstract}
+  %\addcontentsline{toc}{chapter}{Abstract}
+  %\input{text/ch0-abstract}
   
-  \chapter*{Statement of Authorship}
-  \addcontentsline{toc}{chapter}{Declaration of Authorship}
-  \input{text/ch0-declaration}
+  %\chapter*{Statement of Authorship}
+  %\addcontentsline{toc}{chapter}{Declaration of Authorship}
+  %\input{text/ch0-declaration}
   
-  \input{text/ch0-acknowledgements}
-  \input{text/ch0-publications}
-  \input{text/ch0-dedication}
+  %\input{text/ch0-acknowledgements}
+  %\input{text/ch0-publications}
+  %\input{text/ch0-dedication}
   
   \cleardoublepage
   \pagestyle{scrheadings}
@@ -172,11 +182,14 @@
   %\input{text/ch7}
   
   \cleardoublepage
-  \chapter{Appendix 1: Vector Identities}
-  \input{text/app1}
+  \chapter{Appendix: Vector Identities}\label{appendix: vector identities}
+  \input{appendices/vector_identities}
+  
+  \chapter{Appendix: Beamline Properties}\label{appendix: beamline properties}
+  \input{appendices/beamline_properties}
   
   \singlespacing
   \input{text/app-bibliography}
-  \cleardoublepage
+  \cleardoublepagegaussian 
   
 \end{document}

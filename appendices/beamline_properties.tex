@@ -1,0 +1,138 @@
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{lscape}
+% \usepackage{longtable}
+% Note: It may be necessary to compile the document several times to get a multi-page table to line up properly
+
+\begin{landscape}\label{tab: beamline properties}
+\begin{longtable}{llllllll}
+\hline
+Optical Element &
+  Position (m) &
+  \multicolumn{2}{l}{Aperture} &
+  \multicolumn{2}{l}{Operation Angles} &
+  \multicolumn{2}{l}{Controlled Motion} \\ \hline
+\endfirsthead
+%
+\multicolumn{8}{c}%
+{{\bfseries Table \thetable\ continued from previous page}} \\
+\endhead
+%
+Undulator Exit &
+  0 &
+  - &
+   &
+   &
+   &
+   &
+   \\ \hline
+\multirow{3}{*}{HOM1} &
+  \multirow{3}{*}{246.50} &
+  x &
+  0.5125 &
+  \multirow{3}{*}{Pitch} &
+  \multirow{3}{*}{1.1 mrad - 3.6 mrad} &
+  \multicolumn{2}{l}{\multirow{3}{*}{}} \\
+ &
+   &
+  y &
+  0.0100 &
+   &
+   &
+  \multicolumn{2}{l}{} \\
+ &
+   &
+  \multicolumn{2}{l}{} &
+   &
+   &
+  \multicolumn{2}{l}{} \\ \hline
+\multirow{3}{*}{HOM2} &
+  \multirow{3}{*}{246.50} &
+  x &
+  0.5125 &
+  \multirow{3}{*}{Pitch} &
+  \multirow{3}{*}{1.1 mrad - 3.6 mrad} &
+  \multicolumn{2}{l}{\multirow{3}{*}{}} \\
+ &
+   &
+  y &
+  0.0100 &
+   &
+   &
+  \multicolumn{2}{l}{} \\
+ &
+   &
+   &
+   &
+   &
+   &
+  \multicolumn{2}{l}{} \\ \hline
+\multirow{3}{*}{NKB P-SLIT} &
+  \multirow{3}{*}{914.284} &
+  x &
+  3.8 mm &
+  \multicolumn{2}{l}{\multirow{3}{*}{-}} &
+  \multicolumn{2}{l}{\multirow{3}{*}{}} \\
+ &
+   &
+  y &
+  3.8 mm &
+  \multicolumn{2}{l}{} &
+  \multicolumn{2}{l}{} \\
+ &
+   &
+  z &
+  100 mm &
+  \multicolumn{2}{l}{} &
+  \multicolumn{2}{l}{} \\ \hline
+\multirow{3}{*}{NHE} &
+  \multirow{3}{*}{915.484} &
+  x &
+  25 mm &
+  \multirow{3}{*}{Pitch} &
+  \multirow{3}{*}{0.5 mrad - 5.5 mrad} &
+  x &
+  -10 mm - 5 mm \\
+ &
+   &
+  y &
+  950 mm &
+   &
+   &
+  y &
+  - 15 mm - 15 mm \\
+ &
+   &
+  \multicolumn{2}{l}{} &
+   &
+   &
+  \multicolumn{2}{l}{} \\ \hline
+\multirow{3}{*}{NVE} &
+  \multirow{3}{*}{916.484} &
+  x &
+  25 mm &
+  Pitch &
+  - 5.5 mrad - 0.5 mrad &
+  x &
+  -10 mm - 2 mm \\
+ &
+   &
+  y &
+  950 mm &
+  Roll &
+  - 5.0 mrad - 5.0 mrad &
+  y &
+  - 15 mm - 15 mm \\
+ &
+   &
+  \multicolumn{2}{l}{} &
+  Yaw &
+  - 5.0 mrad - 5.0 mrad &
+  \multicolumn{2}{l}{} \\ \hline
+Beam Focus &
+  918.684 &
+  \multicolumn{6}{l}{}
+\caption{beam properties}
+
+\end{longtable}
+\end{landscape}

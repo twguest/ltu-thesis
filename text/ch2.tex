@@ -4,13 +4,28 @@
 
 
 \section{Introduction}
-The small size and scattering cross-section of biomaterials necessitates the requirement for high brightness X-ray sources. While the SASE method is capable of producing high-flux X-ray wavefields with high spatial coherence, microbunching instabilities lead to incoherent temporal beam distributions. 
+The transport of X-ray radiation has been identified to be a primary factor in the disparity between theoretically achievable resolutions and current experimental benchmarks, with the improved understanding of the undulator, transport optics, focussing mirrors, front-end slits and apertures, and their role in forming the illumination-plane photon beam energy, pulse duration, beam size/shape and coherence being outlined as a primary challenge in remediating these differences \cite{sun_current_2018, oberthur_biological_2018}. Understanding the intensity distribution and position in the interaction plane is essential in experimental design and plays a role in the choice of sample-to-detector distances, attenuation of photon beam power, photon energy and pulse duration \cite{aquila_linac_2015} which are chosen to maximise the achievable resolution while satisfying oversampling requirements (\eqn{\ref{eq: sampling requirements}}) and Frensel criterion (\eqn{\ref{eq: Fresnel Criterion}}). Consequently, reduced flux \cite{hagemann_fluenceresolution_2017, nave_achievable_2020} and partial coherence \cite{paganin_spatial_2019} of the illuminating wavefield are implicated in limiting the length scales accessible in imaging soft matter with hard x-rays. \\ 
 
-\subsection{Challenges in Modern Imaging using Hard X-rays}
-The resolution of contemporary imaging techniques is limited both by the amplification of image aberrations to produce holographic speckle in coherent imaging systems \cite{goodman_fundamental_1976,deng_coherence_2017}, and loss-of-information due to feature blurring in partially coherent imaging systems \cite{nugent_coherence_2003}. In general, diffraction based imaging techniques, \ie Coherent Diffractive Imaging (CDI) \cite{krenkel_phase-contrast_2015, zabler_optimization_2005, miao_extending_1999} and Holographic/Fresnel CDI \cite{snigirev_possibilities_1995, cloetens_holotomography_1999, williams_fresnel_2006, nugent_diffraction_2005}, require a high degree of partial coherence. The implication of partial coherence is non-trivial and has been extensively discussed within the context of image reconstruction and phase contrast imaging techniques \cite{gureyev_spatial_2016, vartanyants_origins_2003, hagemann_coherence-resolution_2018} and is intrinsically linked to definitions of source fluence requirements \cite{hagemann_fluenceresolution_2017,nave_achievable_2020,paganin_spatial_2019}. 
+The assumption of coherent illumination in CDI sample reconstructions \cite{nugent_measurement_2011} is ill-fitting in a XFEL context. Despite the development of phase-retrieval methods based on the reconstruction of the coherence function of the illuminating wavefield for 3rd generation light sources \cite{whitehead_diffractive_2009, hagemann_reconstructing_2017, tran_modal_2017}, the in-applicability of interferometric and ptychographic reconstruction techniques to the study of XFEL wavefields (a fact which will be discussed in more detail in Chapter \ref{Phase-Retrieval Methods for MHz XFELs}) means that the coherence properties and subsequent response of XFEL based phase-contrast imaging systems are poorly characterised. As discussed in Section \ref{s: properties of XFEL radiation}, the spatiotemporal coherence properties and intensity statistics of fourth generation XFEL light sources are well understood at the undulator exit in the linear-regime.\\
+
+Similar sentiments cannot be shared for the non-linear (saturation) mode of operation, nor the illumination-plane beam. The requirement of grazing incidence angles for reflective hard X-ray optics truncates the beam, reducing the net transmitted photon flux \cite{aquila_fluence_2015} and introducing intensity fringing due to diffraction from the mirror aperture that impacts the intensity profile of the illuminating beam \cite{chalupsky_imprinting_2015, gerasimova_situ_2013}. Diffraction effects alone have been attributed to 100x reductions in fluence at hard x-ray wavelengths \cite{ayyer_perspectives_2015}. These effects compounded by the sensitivity of short wavelength radiation to mirror surface height errors \cite{samoylova_requirements_2009} and defects \cite{matsuyama_nanofocusing_2018}, which at-minimum (see \cite{xia_nontrivial_nodate}) introduce quasi-random, wavelength scale phase-perturbations on the wavefield \footnote{We chose not to discuss the implications of mirror heating in this context}.\\
+
+ 
+
+The development of start-to-end (S2E) simulations has been identified as a requirement for maximising the output of free electron laser facilities \cite{aquila_linac_2015}. Here we extend on previous models of the Single Particles Clusters and Biomolecules - Serial Femtosecond Crystallography (SPB-SFX) instrument at the European XFEL \cite{fortmann-grote_start--end_2017} (add yoon citation) by improving modelling of the optical transport system, including accurate representation of residual surface height errors in the primary focussing elements, to evaluate the instrument-end beam properties for the purpose of assessing the accessible length scales in XFEL phase-contrast imaging experiments.\\
+
+ 
  
 
 \subsection{The SPB-SFX Instrument}
+
+
+SPB-SFX instrument is appended to the SASE1 beamline of the European XFEL for the structural determination of biological specimens of size 0.1 $\mu m$ to 1.0 $\mu m$ at X-ray energies between 3 keV and 16 keV \cite{mancuso_scientific_2013,mancuso_single_2019}. The optical transport system spans approximately 920 m from the undulator exit to the nominal beam focus \cite{tschentscher_simulations_2017}.\\
+
+A pair of planar horizontal offset mirrors (HOMs): HOM1 and HOM2, are located downstream of the undulator exit. HOM1 is utilised for filtering the FEL beam from high-energy bremsstrahlung and spontaneous radiation outside the design bandwidth \cite{ayyer_perspectives_2015}. Transport mirrors were designed to accept $4 \sigma$ beam radius. Focusing of the XFEL beam is achieved independently in each of the transverse directions by a pair of Kirkpatrick-Baez mirrors \cite{bean_design_2016} \footnote{Note that in this case, we consider only the nanofocussing optical layout at the SPB-SFX instrument.}. Horizontal (NHE) and vertical (NVE) elliptical mirrors are located $\approx$ 2.2 m and 3.2 m upstream of the focus. Each mirror has a 950 mm x 25 mm clear aperture. 
+Beam conditioning is achieved by a 3.8 mm square aperture located 1.2 m upstream of the NHE. The detector modules available and associated refocussing elements are discussed elsewhere and are not relevant to a discussion of the beam focus \cite{ruter_x-ray_2015}. The instrument houses two-sets of mirror configurations coated with 50 nm of reflective $B_4C$ and $Ru$ coatings for operation at photon energies of 3.0 keV - 7.5 keV and 7.5 keV - 16.0 keV respectively. A table of instrument parameters is given in Appendix \ref{appendix: beamline properties}{}.
+\\
+
 
 
 
@@ -18,9 +33,7 @@ The resolution of contemporary imaging techniques is limited both by the amplifi
 \section{Method}
 
 
-\subsection{The Coherent Source Model}
-
-\subsubsection{Description and Validation of the Analytical Source Model}
+\subsection{Analytical Source Model}
 Here we describe the construction and validation of a coherent source model that enables a study of the influence of the optical transport system in the absence of the implications of partial coherence. We note that this source provides a description of the shape and size of the SPB-SFX source using analytical data, but is a poor descriptor of the stochastic nature of XFEL pulses.\\ 
 
 \noindent We begin with a Gaussian source defined in $\mathbb{R}^3$ at the undulator exit:
@@ -142,23 +155,82 @@ Figure \ref{f: coherent source properties} compares the modelled properties of t
 \end{figure}
 
 
-\subsection{Modelling Beamline Optics}
-\subsubsection{Description and Validation of the Mirror Materials}
-\subsubsection{Description and Validation of the Mirror Apertures}
-\subsubsection{Description and Validation of the Mirror Surfaces}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/spb_model/enclosed_energy.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
 
-\subsection{The Coherent Focus}
+ 
+ 
+\subsection{Beamline Model}
+Each optical element was treated under the projection approximation (\eqn{\ref{eq: projection approximation}}, where the real and complex components of the complex refractive index were provided via \cite{henke_x-ray_1993}. The implications of beam truncation as a function of rotation of the mirror aperture was achieved by rotating the projected two-dimensional transmission function in three-dimensions:
 
+\begin{equation}
+\mathcal{T}_\om^{(R)}\spatial =  \mathcal{R}\{\mathcal{T}_\om\spatial \},
+\end{equation}
 
-\subsection{The Partially Coherent Source Model}
-\subsubsection{Description of the Partially Coherent Source}
-\subsubsection{Comparison to Experiment}
+where we define the rotation operator, $\mathcal{R}$:
 
+\begin{equation}\label{eq: rotation operator}
+    \mathcal{R} = 
+    \underbrace{\begin{bmatrix}
+\cos\theta_z & -\sin\theta_z & 0 \\
+-\sin\theta_z & \cos\theta_z & 0 \\
+0 & 0 & 0 
+\end{bmatrix}}_{Yaw}
+\underbrace{\begin{bmatrix}
+\cos\theta_y & 0 & \sin\theta_y \\
+0 & 1 & 0 \\
+-\sin\theta_y & 0 & \cos\theta_y 
+\end{bmatrix}}_{Pitch}
+\underbrace{\begin{bmatrix}
+1 & 0 & 0 \\
+0 & \cos\theta_x & -sin\theta_x \\
+0 & \sin\theta_x & \cos\theta_x 
+\end{bmatrix}}_{Roll}.
+\end{equation}
 
+A comparison of the intensity transmission of HOM1 with finite and infinite aperture is presented in Fig \ref{f: Mirror Transmission Coherent Model}. The reflectivity of the mirror in the absence of beam truncation maps well to the analytical model in the case of both the $B_4C$ and $Ru$ mirror coatings. Importantly, the transmission of the mirror, using the coherent source model, is dominated by the acceptance of the mirror aperture. To maximise the photon flux transported to the focal plane, we select the maximal operational angle for each mirror, as defined in the SPB-SFX instrument parameters in Table \ref{tab: beamline properties}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/spb_model/mirror_trans_both.png}
+\caption{Comparison of the analytical mirror transmission at grazing incidence mirror angles with and without the truncation of the incident beam due to the mirror aperture at 4.98 keV (left) and 9.20 keV (right).}
+\label{f: Mirror Transmission Coherent Model}
+\end{figure}
+
+The optical path difference (OPD) due to mirror surface height errors was modelled from manufacturer surface profiles. The phase-shift due to the height error was defined to be a phase-screen transmission element:
+
+\begin{equation}
+\mathcal{T}_{error}(x,y) = \exp(-ik 2h(x',y') sin\theta_i), 
+\end{equation}
+where $h(x',y')$ is the measured height profile of the mirror surface. The one-dimensional surface profiles for the transport and focussing mirrors are illustrated in Figure \ref{f: Mirror Height Error Trace}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/spb_model/mirror_height_error.png}
+\caption{Trace of mirror surface height errors for transport (left) and focusing optics (right). NHE and NVE mirror surface errors are presented for the horizontal and vertical axes respectively. Mirror height errors presented were assumed to be uniform across the two-dimensional mirror face.}
+\label{f: Mirror Height Error Trace}
+\end{figure}
+
+\subsection{Partially Coherent Source Model}
+ 
 
 
 \section{Results and Discussion}
-\subsection{Properties of the Partially Coherent Focus}
-\subsection{Discussion}
 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{figures/spb_model/partially_coherent_result.png}
+\caption{}
+\label{f: XFEL Source Properties}
+\end{figure}
+
+
+
+\subsection{Discussion}
+Contemporary perspectives on CDI using XFEL beam focii fail to take into account the implications of beam transport \cite{starodub_dose_2008, ayyer_perspectives_2015}
 \section{Conclusions}
